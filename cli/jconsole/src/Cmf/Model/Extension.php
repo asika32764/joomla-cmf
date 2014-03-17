@@ -95,7 +95,7 @@ class Extension extends \JModelDatabase
 				}
 
 				// Analyze
-				$position = $type ? 'site' : 'admin';
+				$position = $client ? 'admin' : 'site';
 
 				$this->state->set('uninstall.' . $type . '.' . $position, $uninstalled);
 			}
