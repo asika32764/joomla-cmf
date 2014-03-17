@@ -1,5 +1,5 @@
 component:
-    1:
+    1: # admin
         - com_ajax
         - com_banners
         - com_contact
@@ -17,7 +17,7 @@ component:
         - com_joomlaupdate
         - com_postinstall
 module:
-    0:
+    0: # site
         - mod_articles_archive
         - mod_articles_latest
         - mod_articles_popular
@@ -35,7 +35,7 @@ module:
         - mod_articles_category
         - mod_articles_categories
         - mod_finder
-    1:
+    1: # admin
         - mod_feed
         - mod_latest
         - mod_popular
@@ -46,6 +46,31 @@ module:
         - mod_tags_popular
         - mod_tags_similar
 plugin:
-    0:
-
-
+    0: # site
+        - plg_content_contact
+        - plg_content_emailcloak
+        - plg_content_pagebreak
+        - plg_content_pagenavigation
+        - plg_content_vote
+        - plg_editors-xtd_article
+        - plg_editors-xtd_pagebreak
+        - plg_search_categories
+        - plg_search_contacts
+        - plg_search_content
+        - plg_search_newsfeeds
+        - plg_search_weblinks
+        - plg_user_profile
+        - plg_extension_joomla
+        - plg_content_joomla
+        - plg_quickicon_joomlaupdate
+        - plg_quickicon_extensionupdate
+        - plg_system_highlight
+        - plg_content_finder
+        - plg_finder_categories
+        - plg_finder_contacts
+        - plg_finder_content
+        - plg_finder_newsfeeds
+        - plg_finder_weblinks
+        - plg_finder_tags
+        - plg_twofactorauth_totp
+        - plg_twofactorauth_yubikey
