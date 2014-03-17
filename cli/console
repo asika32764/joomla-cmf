@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+<?php
+
+include_once dirname(__DIR__) . '/libraries/jconsole/bin/console.php';

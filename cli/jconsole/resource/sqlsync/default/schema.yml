@@ -1,0 +1,895 @@
+'#__assets':
+    name: '#__assets'
+    from:
+        - '#__assets'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: 'Primary Key', From: [id] }
+        parent_id: { Field: parent_id, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set parent.', From: [parent_id] }
+        lft: { Field: lft, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set lft.', From: [lft] }
+        rgt: { Field: rgt, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set rgt.', From: [rgt] }
+        level: { Field: level, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: '', Comment: 'The cached level in the nested tree.', From: [level] }
+        name: { Field: name, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: "The unique name for the asset.\n", From: [name] }
+        title: { Field: title, Type: varchar(100), 'Null': NO, Default: null, Extra: '', Comment: 'The descriptive title for the asset.', From: [title] }
+        rules: { Field: rules, Type: varchar(5120), 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded access control.', From: [rules] }
+    index:
+        - { Table: '#__assets', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__assets', Non_unique: '0', Key_name: idx_asset_name, Seq_in_index: '1', Column_name: name, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__assets', Non_unique: '1', Key_name: idx_lft_rgt, Seq_in_index: '1', Column_name: lft, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__assets', Non_unique: '1', Key_name: idx_lft_rgt, Seq_in_index: '2', Column_name: rgt, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__assets', Non_unique: '1', Key_name: idx_parent_id, Seq_in_index: '1', Column_name: parent_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '0', '0', '71', '0', root.1, 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}']
+        - ['2', '1', '1', '2', '1', com_admin, com_admin, '{}']
+        - ['4', '1', '3', '4', '1', com_cache, com_cache, '{"core.admin":{"7":1},"core.manage":{"7":1}}']
+        - ['5', '1', '5', '6', '1', com_checkin, com_checkin, '{"core.admin":{"7":1},"core.manage":{"7":1}}']
+        - ['6', '1', '7', '8', '1', com_config, com_config, '{}']
+        - ['9', '1', '9', '10', '1', com_cpanel, com_cpanel, '{}']
+        - ['10', '1', '11', '12', '1', com_installer, com_installer, '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}']
+        - ['11', '1', '13', '14', '1', com_languages, com_languages, '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['12', '1', '15', '16', '1', com_login, com_login, '{}']
+        - ['13', '1', '17', '18', '1', com_mailto, com_mailto, '{}']
+        - ['14', '1', '19', '20', '1', com_massmail, com_massmail, '{}']
+        - ['15', '1', '21', '22', '1', com_media, com_media, '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}']
+        - ['16', '1', '23', '24', '1', com_menus, com_menus, '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['18', '1', '25', '56', '1', com_modules, com_modules, '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['20', '1', '57', '58', '1', com_plugins, com_plugins, '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}']
+        - ['21', '1', '59', '60', '1', com_redirect, com_redirect, '{"core.admin":{"7":1},"core.manage":[]}']
+        - ['23', '1', '61', '62', '1', com_templates, com_templates, '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['24', '1', '63', '66', '1', com_users, com_users, '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['26', '1', '67', '68', '1', com_wrapper, com_wrapper, '{}']
+        - ['32', '24', '64', '65', '1', com_users.category.7, Uncategorised, '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['35', '1', '69', '70', '1', com_tags, com_tags, '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}']
+        - ['39', '18', '26', '27', '2', com_modules.module.1, 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['40', '18', '28', '29', '2', com_modules.module.2, Login, '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['41', '18', '30', '31', '2', com_modules.module.3, 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['42', '18', '32', '33', '2', com_modules.module.4, 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['43', '18', '34', '35', '2', com_modules.module.8, Toolbar, '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['44', '18', '36', '37', '2', com_modules.module.9, 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['45', '18', '38', '39', '2', com_modules.module.10, 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['46', '18', '40', '41', '2', com_modules.module.12, 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['47', '18', '42', '43', '2', com_modules.module.13, 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['48', '18', '44', '45', '2', com_modules.module.14, 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['49', '18', '46', '47', '2', com_modules.module.15, Title, '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['50', '18', '48', '49', '2', com_modules.module.16, 'Login Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['51', '18', '50', '51', '2', com_modules.module.17, Breadcrumbs, '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['52', '18', '52', '53', '2', com_modules.module.79, 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+        - ['53', '18', '54', '55', '2', com_modules.module.86, 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}']
+'#__associations':
+    name: '#__associations'
+    from:
+        - '#__associations'
+    columns:
+        id: { Field: id, Type: int(11), 'Null': NO, Default: null, Extra: '', Comment: 'A reference to the associated item.', From: [id] }
+        context: { Field: context, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: 'The context of the associated item.', From: [context] }
+        key: { Field: key, Type: char(32), 'Null': NO, Default: null, Extra: '', Comment: 'The key for the association computed from an md5 on associated ids.', From: [key] }
+    index:
+        - { Table: '#__associations', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: context, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__associations', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__associations', Non_unique: '1', Key_name: idx_key, Seq_in_index: '1', Column_name: key, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__categories':
+    name: '#__categories'
+    from:
+        - '#__categories'
+    columns:
+        id: { Field: id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        asset_id: { Field: asset_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'FK to the #__assets table.', From: [asset_id] }
+        parent_id: { Field: parent_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [parent_id] }
+        lft: { Field: lft, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [lft] }
+        rgt: { Field: rgt, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [rgt] }
+        level: { Field: level, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [level] }
+        path: { Field: path, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [path] }
+        extension: { Field: extension, Type: varchar(50), 'Null': NO, Default: '', Extra: '', Comment: '', From: [extension] }
+        title: { Field: title, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [title] }
+        alias: { Field: alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [alias] }
+        note: { Field: note, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [note] }
+        description: { Field: description, Type: mediumtext, 'Null': NO, Default: null, Extra: '', Comment: '', From: [description] }
+        published: { Field: published, Type: tinyint(1), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [published] }
+        checked_out: { Field: checked_out, Type: 'int(11) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [checked_out_time] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [access] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+        metadesc: { Field: metadesc, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The meta description for the page.', From: [metadesc] }
+        metakey: { Field: metakey, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The meta keywords for the page.', From: [metakey] }
+        metadata: { Field: metadata, Type: varchar(2048), 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded metadata properties.', From: [metadata] }
+        created_user_id: { Field: created_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [created_user_id] }
+        created_time: { Field: created_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [created_time] }
+        modified_user_id: { Field: modified_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [modified_user_id] }
+        modified_time: { Field: modified_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [modified_time] }
+        hits: { Field: hits, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [hits] }
+        language: { Field: language, Type: char(7), 'Null': NO, Default: null, Extra: '', Comment: '', From: [language] }
+        version: { Field: version, Type: 'int(10) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: '', From: [version] }
+    index:
+        - { Table: '#__categories', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: cat_idx, Seq_in_index: '1', Column_name: extension, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: cat_idx, Seq_in_index: '2', Column_name: published, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: cat_idx, Seq_in_index: '3', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_access, Seq_in_index: '1', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_checkout, Seq_in_index: '1', Column_name: checked_out, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_path, Seq_in_index: '1', Column_name: path, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '1', Column_name: lft, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '2', Column_name: rgt, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_alias, Seq_in_index: '1', Column_name: alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__categories', Non_unique: '1', Key_name: idx_language, Seq_in_index: '1', Column_name: language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '0', '0', '0', '13', '0', '', system, ROOT, root, '', '', '1', '0', '0000-00-00 00:00:00', '1', '{}', '', '', '{}', '42', '2011-01-01 00:00:01', '0', '0000-00-00 00:00:00', '0', '*', '1']
+        - ['7', '32', '1', '11', '12', '1', uncategorised, com_users, Uncategorised, uncategorised, '', '', '1', '0', '0000-00-00 00:00:00', '1', '{"category_layout":"","image":""}', '', '', '{"author":"","robots":""}', '42', '2011-01-01 00:00:01', '0', '0000-00-00 00:00:00', '0', '*', '1']
+'#__content_types':
+    name: '#__content_types'
+    from:
+        - '#__content_types'
+    columns:
+        type_id: { Field: type_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [type_id] }
+        type_title: { Field: type_title, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [type_title] }
+        type_alias: { Field: type_alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [type_alias] }
+        table: { Field: table, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [table] }
+        rules: { Field: rules, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [rules] }
+        field_mappings: { Field: field_mappings, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [field_mappings] }
+        router: { Field: router, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [router] }
+        content_history_options: { Field: content_history_options, Type: varchar(5120), 'Null': YES, Default: null, Extra: '', Comment: 'JSON string for com_contenthistory options', From: [content_history_options] }
+    index:
+        - { Table: '#__content_types', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: type_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__content_types', Non_unique: '1', Key_name: idx_alias, Seq_in_index: '1', Column_name: type_alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', Article, com_content.article, '{"special":{"dbtable":"#__content","key":"id","type":"Content","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias","core_created_time":"created","core_modified_time":"modified","core_body":"introtext", "core_hits":"hits","core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"attribs", "core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"urls", "core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"catid", "core_xreference":"xreference", "asset_id":"asset_id"}, "special":{"fulltext":"fulltext"}}', 'ContentHelperRoute::getArticleRoute', '{"formFile":"administrator\/components\/com_content\/models\/forms\/article.xml", "hideFields":["asset_id","checked_out","checked_out_time","version"],"ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time", "version", "hits"],"convertToInt":["publish_up", "publish_down", "featured", "ordering"],"displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}']
+        - ['2', Weblink, com_weblinks.weblink, '{"special":{"dbtable":"#__weblinks","key":"id","type":"Weblink","prefix":"WeblinksTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias","core_created_time":"created","core_modified_time":"modified","core_body":"description", "core_hits":"hits","core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params", "core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"urls", "core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{}}', 'WeblinksHelperRoute::getWeblinkRoute', '{"formFile":"administrator\/components\/com_weblinks\/models\/forms\/weblink.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","featured","images"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time", "version", "hits"], "convertToInt":["publish_up", "publish_down", "featured", "ordering"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}']
+        - ['3', Contact, com_contact.contact, '{"special":{"dbtable":"#__contact_details","key":"id","type":"Contact","prefix":"ContactTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"name","core_state":"published","core_alias":"alias","core_created_time":"created","core_modified_time":"modified","core_body":"address", "core_hits":"hits","core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params", "core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"image", "core_urls":"webpage", "core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{"con_position":"con_position","suburb":"suburb","state":"state","country":"country","postcode":"postcode","telephone":"telephone","fax":"fax","misc":"misc","email_to":"email_to","default_con":"default_con","user_id":"user_id","mobile":"mobile","sortname1":"sortname1","sortname2":"sortname2","sortname3":"sortname3"}}', 'ContactHelperRoute::getContactRoute', '{"formFile":"administrator\/components\/com_contact\/models\/forms\/contact.xml","hideFields":["default_con","checked_out","checked_out_time","version","xreference"],"ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time", "version", "hits"],"convertToInt":["publish_up", "publish_down", "featured", "ordering"], "displayLookup":[ {"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ] }']
+        - ['4', Newsfeed, com_newsfeeds.newsfeed, '{"special":{"dbtable":"#__newsfeeds","key":"id","type":"Newsfeed","prefix":"NewsfeedsTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"name","core_state":"published","core_alias":"alias","core_created_time":"created","core_modified_time":"modified","core_body":"description", "core_hits":"hits","core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params", "core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"link", "core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{"numarticles":"numarticles","cache_time":"cache_time","rtl":"rtl"}}', 'NewsfeedsHelperRoute::getNewsfeedRoute', '{"formFile":"administrator\/components\/com_newsfeeds\/models\/forms\/newsfeed.xml","hideFields":["asset_id","checked_out","checked_out_time","version"],"ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time", "version", "hits"],"convertToInt":["publish_up", "publish_down", "featured", "ordering"],"displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}']
+        - ['5', User, com_users.user, '{"special":{"dbtable":"#__users","key":"id","type":"User","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"name","core_state":"null","core_alias":"username","core_created_time":"registerdate","core_modified_time":"lastvisitDate","core_body":"null", "core_hits":"null","core_publish_up":"null","core_publish_down":"null","access":"null", "core_params":"params", "core_featured":"null", "core_metadata":"null", "core_language":"null", "core_images":"null", "core_urls":"null", "core_version":"null", "core_ordering":"null", "core_metakey":"null", "core_metadesc":"null", "core_catid":"null", "core_xreference":"null", "asset_id":"null"}, "special":{}}', 'UsersHelperRoute::getUserRoute', '']
+        - ['6', 'Article Category', com_content.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', 'ContentHelperRoute::getCategoryRoute', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+        - ['7', 'Contact Category', com_contact.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', 'ContactHelperRoute::getCategoryRoute', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+        - ['8', 'Newsfeeds Category', com_newsfeeds.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', 'NewsfeedsHelperRoute::getCategoryRoute', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+        - ['9', 'Weblinks Category', com_weblinks.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', 'WeblinksHelperRoute::getCategoryRoute', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+        - ['10', Tag, com_tags.tag, '{"special":{"dbtable":"#__tags","key":"tag_id","type":"Tag","prefix":"TagsTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"urls", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"null", "core_xreference":"null", "asset_id":"null"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path"}}', 'TagsHelperRoute::getTagRoute', '{"formFile":"administrator\/components\/com_tags\/models\/forms\/tag.xml", "hideFields":["checked_out","checked_out_time","version", "lft", "rgt", "level", "path", "urls", "publish_up", "publish_down"],"ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}, {"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"}, {"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}']
+        - ['11', Banner, com_banners.banner, '{"special":{"dbtable":"#__banners","key":"id","type":"Banner","prefix":"BannersTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"name","core_state":"published","core_alias":"alias","core_created_time":"created","core_modified_time":"modified","core_body":"description", "core_hits":"null","core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"link", "core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"catid", "core_xreference":"null", "asset_id":"null"}, "special":{"imptotal":"imptotal", "impmade":"impmade", "clicks":"clicks", "clickurl":"clickurl", "custombannercode":"custombannercode", "cid":"cid", "purchase_type":"purchase_type", "track_impressions":"track_impressions", "track_clicks":"track_clicks"}}', '', '{"formFile":"administrator\/components\/com_banners\/models\/forms\/banner.xml", "hideFields":["checked_out","checked_out_time","version", "reset"],"ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time", "version", "imptotal", "impmade", "reset"], "convertToInt":["publish_up", "publish_down", "ordering"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}, {"sourceColumn":"cid","targetTable":"#__banner_clients","targetColumn":"id","displayColumn":"name"}, {"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}']
+        - ['12', 'Banners Category', com_banners.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special": {"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', '', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+        - ['13', 'Banner Client', com_banners.client, '{"special":{"dbtable":"#__banner_clients","key":"id","type":"Client","prefix":"BannersTable"}}', '', '', '', '{"formFile":"administrator\/components\/com_banners\/models\/forms\/client.xml", "hideFields":["checked_out","checked_out_time"], "ignoreChanges":["checked_out", "checked_out_time"], "convertToInt":[], "displayLookup":[]}']
+        - ['14', 'User Notes', com_users.note, '{"special":{"dbtable":"#__user_notes","key":"id","type":"Note","prefix":"UsersTable"}}', '', '', '', '{"formFile":"administrator\/components\/com_users\/models\/forms\/note.xml", "hideFields":["checked_out","checked_out_time", "publish_up", "publish_down"],"ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"],"displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}, {"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}, {"sourceColumn":"user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}, {"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}']
+        - ['15', 'User Notes Category', com_users.category, '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}', '', '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}', '', '{"formFile":"administrator\/components\/com_categories\/models\/forms\/category.xml", "hideFields":["checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}, {"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}']
+'#__core_log_searches':
+    name: '#__core_log_searches'
+    from:
+        - '#__core_log_searches'
+    columns:
+        search_term: { Field: search_term, Type: varchar(128), 'Null': NO, Default: '', Extra: '', Comment: '', From: [search_term] }
+        hits: { Field: hits, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [hits] }
+    index: {  }
+'#__extensions':
+    name: '#__extensions'
+    from:
+        - '#__extensions'
+    columns:
+        extension_id: { Field: extension_id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [extension_id] }
+        name: { Field: name, Type: varchar(100), 'Null': NO, Default: null, Extra: '', Comment: '', From: [name] }
+        type: { Field: type, Type: varchar(20), 'Null': NO, Default: null, Extra: '', Comment: '', From: [type] }
+        element: { Field: element, Type: varchar(100), 'Null': NO, Default: null, Extra: '', Comment: '', From: [element] }
+        folder: { Field: folder, Type: varchar(100), 'Null': NO, Default: null, Extra: '', Comment: '', From: [folder] }
+        client_id: { Field: client_id, Type: tinyint(3), 'Null': NO, Default: null, Extra: '', Comment: '', From: [client_id] }
+        enabled: { Field: enabled, Type: tinyint(3), 'Null': NO, Default: '1', Extra: '', Comment: '', From: [enabled] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: '', From: [access] }
+        protected: { Field: protected, Type: tinyint(3), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [protected] }
+        manifest_cache: { Field: manifest_cache, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [manifest_cache] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+        custom_data: { Field: custom_data, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [custom_data] }
+        system_data: { Field: system_data, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [system_data] }
+        checked_out: { Field: checked_out, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [checked_out_time] }
+        ordering: { Field: ordering, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [ordering] }
+        state: { Field: state, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [state] }
+    index:
+        - { Table: '#__extensions', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: extension_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: element_clientid, Seq_in_index: '1', Column_name: element, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: element_clientid, Seq_in_index: '2', Column_name: client_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: element_folder_clientid, Seq_in_index: '1', Column_name: element, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: element_folder_clientid, Seq_in_index: '2', Column_name: folder, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: element_folder_clientid, Seq_in_index: '3', Column_name: client_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: extension, Seq_in_index: '1', Column_name: type, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: extension, Seq_in_index: '2', Column_name: element, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: extension, Seq_in_index: '3', Column_name: folder, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__extensions', Non_unique: '1', Key_name: extension, Seq_in_index: '4', Column_name: client_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['3', com_admin, component, com_admin, '', '1', '1', '1', '0', '{"name":"com_admin","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\n\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_ADMIN_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['5', com_cache, component, com_cache, '', '1', '1', '1', '0', '{"name":"com_cache","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CACHE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['6', com_categories, component, com_categories, '', '1', '1', '1', '0', '{"name":"com_categories","type":"component","creationDate":"December 2007","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CATEGORIES_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['7', com_checkin, component, com_checkin, '', '1', '1', '1', '0', '{"name":"com_checkin","type":"component","creationDate":"Unknown","author":"Joomla! Project","copyright":"(C) 2005 - 2008 Open Source Matters. All rights reserved.\n\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CHECKIN_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['9', com_cpanel, component, com_cpanel, '', '1', '1', '1', '0', '{"name":"com_cpanel","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CPANEL_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['10', com_installer, component, com_installer, '', '1', '1', '1', '0', '{"name":"com_installer","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_INSTALLER_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['11', com_languages, component, com_languages, '', '1', '1', '1', '0', '{"name":"com_languages","type":"component","creationDate":"2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\n\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_LANGUAGES_XML_DESCRIPTION","group":""}', '{"administrator":"en-GB","site":"en-GB"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['12', com_login, component, com_login, '', '1', '1', '1', '0', '{"name":"com_login","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_LOGIN_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['13', com_media, component, com_media, '', '1', '1', '0', '0', '{"name":"com_media","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_MEDIA_XML_DESCRIPTION","group":""}', '{"upload_extensions":"bmp,csv,doc,gif,ico,jpg,jpeg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,GIF,ICO,JPG,JPEG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS","upload_maxsize":"10","file_path":"images","image_path":"images","restrict_uploads":"1","allowed_media_usergroup":"3","check_mime":"1","image_extensions":"bmp,gif,jpg,png","ignore_extensions":"","upload_mime":"image\/jpeg,image\/gif,image\/png,image\/bmp,application\/x-shockwave-flash,application\/msword,application\/excel,application\/pdf,application\/powerpoint,text\/plain,application\/x-zip","upload_mime_illegal":"text\/html"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['14', com_menus, component, com_menus, '', '1', '1', '1', '0', '{"name":"com_menus","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_MENUS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['16', com_modules, component, com_modules, '', '1', '1', '1', '0', '{"name":"com_modules","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_MODULES_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['18', com_plugins, component, com_plugins, '', '1', '1', '1', '0', '{"name":"com_plugins","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_PLUGINS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['20', com_templates, component, com_templates, '', '1', '1', '1', '0', '{"name":"com_templates","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_TEMPLATES_XML_DESCRIPTION","group":""}', '{"template_positions_display":"0","upload_limit":"2","image_formats":"gif,bmp,jpg,jpeg,png","source_formats":"txt,less,ini,xml,js,php,css","font_formats":"woff,ttf,otf","compressed_formats":"zip"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['23', com_config, component, com_config, '', '1', '1', '0', '0', '{"name":"com_config","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CONFIG_XML_DESCRIPTION","group":""}', '{"filters":{"1":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"9":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"6":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"7":{"filter_type":"NONE","filter_tags":"","filter_attributes":""},"2":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"3":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"4":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"5":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"8":{"filter_type":"NONE","filter_tags":"","filter_attributes":""}}}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['24', com_redirect, component, com_redirect, '', '1', '1', '0', '0', '{"name":"com_redirect","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_REDIRECT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['25', com_users, component, com_users, '', '1', '1', '0', '0', '{"name":"com_users","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_USERS_XML_DESCRIPTION","group":""}', '{"allowUserRegistration":"1","new_usertype":"2","guest_usergroup":"9","sendpassword":"1","useractivation":"1","mail_to_admin":"0","captcha":"","frontend_userparams":"1","site_language":"0","change_login_name":"0","reset_count":"10","reset_time":"1","minimum_length":"4","minimum_integers":"0","minimum_symbols":"0","minimum_uppercase":"0","save_history":"1","history_limit":5,"mailSubjectPrefix":"","mailBodySuffix":""}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['29', com_tags, component, com_tags, '', '1', '1', '1', '0', '{"name":"com_tags","type":"component","creationDate":"December 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.1.0","description":"COM_TAGS_XML_DESCRIPTION","group":""}', '{"tag_layout":"_:default","save_history":"1","history_limit":5,"show_tag_title":"0","tag_list_show_tag_image":"0","tag_list_show_tag_description":"0","tag_list_image":"","show_tag_num_items":"0","tag_list_orderby":"title","tag_list_orderby_direction":"ASC","show_headings":"0","tag_list_show_date":"0","tag_list_show_item_image":"0","tag_list_show_item_description":"0","tag_list_item_maximum_characters":0,"return_any_or_all":"1","include_children":"0","maximum":200,"tag_list_language_filter":"all","tags_layout":"_:default","all_tags_orderby":"title","all_tags_orderby_direction":"ASC","all_tags_show_tag_image":"0","all_tags_show_tag_descripion":"0","all_tags_tag_maximum_characters":20,"all_tags_show_tag_hits":"0","filter_field":"1","show_pagination_limit":"1","show_pagination":"2","show_pagination_results":"1","tag_field_ajax_mode":"1","show_feed_link":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['100', PHPMailer, library, phpmailer, '', '0', '1', '1', '0', '{"name":"PHPMailer","type":"library","creationDate":"2001","author":"PHPMailer","copyright":"(c) 2001-2003, Brent R. Matzelle, (c) 2004-2009, Andy Prevost. All Rights Reserved., (c) 2010-2013, Jim Jagielski. All Rights Reserved.","authorEmail":"jimjag@gmail.com","authorUrl":"https:\/\/github.com\/PHPMailer\/PHPMailer","version":"5.2.6","description":"LIB_PHPMAILER_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['101', SimplePie, library, simplepie, '', '0', '1', '1', '0', '{"name":"SimplePie","type":"library","creationDate":"2004","author":"SimplePie","copyright":"Copyright (c) 2004-2009, Ryan Parman and Geoffrey Sneddon","authorEmail":"","authorUrl":"http:\/\/simplepie.org\/","version":"1.2","description":"LIB_SIMPLEPIE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['102', phputf8, library, phputf8, '', '0', '1', '1', '0', '{"name":"phputf8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\/\/sourceforge.net\/projects\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['103', 'Joomla! Platform', library, joomla, '', '0', '1', '1', '0', '{"name":"Joomla! Platform","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"http:\/\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":""}', '{"mediaversion":"c435559c3648738a726066b42cd38690"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['104', 'IDNA Convert', library, idna_convert, '', '0', '1', '1', '0', '{"name":"IDNA Convert","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\/\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\/\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['105', FOF, library, fof, '', '0', '1', '1', '0', '{"name":"FOF","type":"library","creationDate":"2013-12-14","author":"Nicholas K. Dionysopoulos \/ Akeeba Ltd","copyright":"(C)2011-2013 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\/\/www.akeebabackup.com","version":"2.1.1","description":"LIB_FOF_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['106', PHPass, library, phpass, '', '0', '1', '1', '0', '{"name":"PHPass","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\/\/www.openwall.com\/phpass\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['204', mod_breadcrumbs, module, mod_breadcrumbs, '', '0', '1', '1', '0', '{"name":"mod_breadcrumbs","type":"module","creationDate":"July 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_BREADCRUMBS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['205', mod_custom, module, mod_custom, '', '0', '1', '1', '0', '{"name":"mod_custom","type":"module","creationDate":"July 2004","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_CUSTOM_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['208', mod_login, module, mod_login, '', '0', '1', '1', '0', '{"name":"mod_login","type":"module","creationDate":"July 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_LOGIN_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['209', mod_menu, module, mod_menu, '', '0', '1', '1', '0', '{"name":"mod_menu","type":"module","creationDate":"July 2004","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_MENU_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['215', mod_syndicate, module, mod_syndicate, '', '0', '1', '1', '0', '{"name":"mod_syndicate","type":"module","creationDate":"May 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_SYNDICATE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['216', mod_users_latest, module, mod_users_latest, '', '0', '1', '1', '0', '{"name":"mod_users_latest","type":"module","creationDate":"December 2009","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_USERS_LATEST_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['222', mod_languages, module, mod_languages, '', '0', '1', '1', '0', '{"name":"mod_languages","type":"module","creationDate":"February 2010","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_LANGUAGES_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['300', mod_custom, module, mod_custom, '', '1', '1', '1', '0', '{"name":"mod_custom","type":"module","creationDate":"July 2004","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_CUSTOM_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['303', mod_logged, module, mod_logged, '', '1', '1', '1', '0', '{"name":"mod_logged","type":"module","creationDate":"January 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_LOGGED_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['304', mod_login, module, mod_login, '', '1', '1', '1', '0', '{"name":"mod_login","type":"module","creationDate":"March 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_LOGIN_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['305', mod_menu, module, mod_menu, '', '1', '1', '1', '0', '{"name":"mod_menu","type":"module","creationDate":"March 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_MENU_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['308', mod_quickicon, module, mod_quickicon, '', '1', '1', '1', '0', '{"name":"mod_quickicon","type":"module","creationDate":"Nov 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_QUICKICON_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['310', mod_submenu, module, mod_submenu, '', '1', '1', '1', '0', '{"name":"mod_submenu","type":"module","creationDate":"Feb 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_SUBMENU_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['311', mod_title, module, mod_title, '', '1', '1', '1', '0', '{"name":"mod_title","type":"module","creationDate":"Nov 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_TITLE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['312', mod_toolbar, module, mod_toolbar, '', '1', '1', '1', '0', '{"name":"mod_toolbar","type":"module","creationDate":"Nov 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"MOD_TOOLBAR_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['400', plg_authentication_gmail, plugin, gmail, authentication, '0', '0', '1', '0', '{"name":"plg_authentication_gmail","type":"plugin","creationDate":"February 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_GMAIL_XML_DESCRIPTION","group":""}', '{"applysuffix":"0","suffix":"","verifypeer":"1","user_blacklist":""}', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['401', plg_authentication_joomla, plugin, joomla, authentication, '0', '1', '1', '0', '{"name":"plg_authentication_joomla","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_AUTH_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['402', plg_authentication_ldap, plugin, ldap, authentication, '0', '0', '1', '0', '{"name":"plg_authentication_ldap","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_LDAP_XML_DESCRIPTION","group":""}', '{"host":"","port":"389","use_ldapV3":"0","negotiate_tls":"0","no_referrals":"0","auth_method":"bind","base_dn":"","search_string":"","users_dn":"","username":"admin","password":"bobby7","ldap_fullname":"fullName","ldap_email":"mail","ldap_uid":"uid"}', '', '', '0', '0000-00-00 00:00:00', '3', '0']
+        - ['403', plg_content_contact, plugin, contact, content, '0', '1', '1', '0', '{"name":"plg_content_contact","type":"plugin","creationDate":"January 2014","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.2","description":"PLG_CONTENT_CONTACT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['404', plg_content_emailcloak, plugin, emailcloak, content, '0', '1', '1', '0', '{"name":"plg_content_emailcloak","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CONTENT_EMAILCLOAK_XML_DESCRIPTION","group":""}', '{"mode":"1"}', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['406', plg_content_loadmodule, plugin, loadmodule, content, '0', '1', '1', '0', '{"name":"plg_content_loadmodule","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_LOADMODULE_XML_DESCRIPTION","group":""}', '{"style":"xhtml"}', '', '', '0', '2011-09-18 15:22:50', '0', '0']
+        - ['407', plg_content_pagebreak, plugin, pagebreak, content, '0', '1', '1', '0', '{"name":"plg_content_pagebreak","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CONTENT_PAGEBREAK_XML_DESCRIPTION","group":""}', '{"title":"1","multipage_toc":"1","showall":"1"}', '', '', '0', '0000-00-00 00:00:00', '4', '0']
+        - ['408', plg_content_pagenavigation, plugin, pagenavigation, content, '0', '1', '1', '0', '{"name":"plg_content_pagenavigation","type":"plugin","creationDate":"January 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_PAGENAVIGATION_XML_DESCRIPTION","group":""}', '{"position":"1"}', '', '', '0', '0000-00-00 00:00:00', '5', '0']
+        - ['409', plg_content_vote, plugin, vote, content, '0', '1', '1', '0', '{"name":"plg_content_vote","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_VOTE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '6', '0']
+        - ['410', plg_editors_codemirror, plugin, codemirror, editors, '0', '1', '1', '0', '{"name":"plg_editors_codemirror","type":"plugin","creationDate":"28 March 2011","author":"Marijn Haverbeke","copyright":"","authorEmail":"N\/A","authorUrl":"","version":"3.15","description":"PLG_CODEMIRROR_XML_DESCRIPTION","group":""}', '{"lineNumbers":"1","lineWrapping":"1","matchTags":"1","matchBrackets":"1","marker-gutter":"1","autoCloseTags":"1","autoCloseBrackets":"1","autoFocus":"1","theme":"default","tabmode":"indent"}', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['411', plg_editors_none, plugin, none, editors, '0', '1', '1', '0', '{"name":"plg_editors_none","type":"plugin","creationDate":"August 2004","author":"Unknown","copyright":"","authorEmail":"N\/A","authorUrl":"","version":"3.0.0","description":"PLG_NONE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '2', '0']
+        - ['412', plg_editors_tinymce, plugin, tinymce, editors, '0', '1', '1', '0', '{"name":"plg_editors_tinymce","type":"plugin","creationDate":"2005-2013","author":"Moxiecode Systems AB","copyright":"Moxiecode Systems AB","authorEmail":"N\/A","authorUrl":"tinymce.moxiecode.com","version":"4.0.12","description":"PLG_TINY_XML_DESCRIPTION","group":""}', '{"mode":"1","skin":"0","mobile":"0","entity_encoding":"raw","lang_mode":"1","text_direction":"ltr","content_css":"1","content_css_custom":"","relative_urls":"1","newlines":"0","invalid_elements":"script,applet,iframe","extended_elements":"","html_height":"550","html_width":"750","resizing":"1","element_path":"1","fonts":"1","paste":"1","searchreplace":"1","insertdate":"1","colors":"1","table":"1","smilies":"1","hr":"1","link":"1","media":"1","print":"1","directionality":"1","fullscreen":"1","alignment":"1","visualchars":"1","visualblocks":"1","nonbreaking":"1","template":"1","blockquote":"1","wordcount":"1","advlist":"1","autosave":"1","contextmenu":"1","inlinepopups":"1","custom_plugin":"","custom_button":""}', '', '', '0', '0000-00-00 00:00:00', '3', '0']
+        - ['413', plg_editors-xtd_article, plugin, article, editors-xtd, '0', '1', '1', '0', '{"name":"plg_editors-xtd_article","type":"plugin","creationDate":"October 2009","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_ARTICLE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['414', plg_editors-xtd_image, plugin, image, editors-xtd, '0', '1', '1', '0', '{"name":"plg_editors-xtd_image","type":"plugin","creationDate":"August 2004","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_IMAGE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '2', '0']
+        - ['415', plg_editors-xtd_pagebreak, plugin, pagebreak, editors-xtd, '0', '1', '1', '0', '{"name":"plg_editors-xtd_pagebreak","type":"plugin","creationDate":"August 2004","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_EDITORSXTD_PAGEBREAK_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '3', '0']
+        - ['416', plg_editors-xtd_readmore, plugin, readmore, editors-xtd, '0', '1', '1', '0', '{"name":"plg_editors-xtd_readmore","type":"plugin","creationDate":"March 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_READMORE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '4', '0']
+        - ['417', plg_search_categories, plugin, categories, search, '0', '1', '1', '0', '{"name":"plg_search_categories","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_CATEGORIES_XML_DESCRIPTION","group":""}', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['418', plg_search_contacts, plugin, contacts, search, '0', '1', '1', '0', '{"name":"plg_search_contacts","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_CONTACTS_XML_DESCRIPTION","group":""}', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['419', plg_search_content, plugin, content, search, '0', '1', '1', '0', '{"name":"plg_search_content","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_CONTENT_XML_DESCRIPTION","group":""}', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['420', plg_search_newsfeeds, plugin, newsfeeds, search, '0', '1', '1', '0', '{"name":"plg_search_newsfeeds","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_NEWSFEEDS_XML_DESCRIPTION","group":""}', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['421', plg_search_weblinks, plugin, weblinks, search, '0', '1', '1', '0', '{"name":"plg_search_weblinks","type":"plugin","creationDate":"November 2005","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_WEBLINKS_XML_DESCRIPTION","group":""}', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['422', plg_system_languagefilter, plugin, languagefilter, system, '0', '0', '1', '0', '{"name":"plg_system_languagefilter","type":"plugin","creationDate":"July 2010","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SYSTEM_LANGUAGEFILTER_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['423', plg_system_p3p, plugin, p3p, system, '0', '1', '1', '0', '{"name":"plg_system_p3p","type":"plugin","creationDate":"September 2010","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_P3P_XML_DESCRIPTION","group":""}', '{"headers":"NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"}', '', '', '0', '0000-00-00 00:00:00', '2', '0']
+        - ['424', plg_system_cache, plugin, cache, system, '0', '0', '1', '0', '{"name":"plg_system_cache","type":"plugin","creationDate":"February 2007","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CACHE_XML_DESCRIPTION","group":""}', '{"browsercache":"0","cachetime":"15"}', '', '', '0', '0000-00-00 00:00:00', '9', '0']
+        - ['425', plg_system_debug, plugin, debug, system, '0', '1', '1', '0', '{"name":"plg_system_debug","type":"plugin","creationDate":"December 2006","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_DEBUG_XML_DESCRIPTION","group":""}', '{"profile":"1","queries":"1","memory":"1","language_files":"1","language_strings":"1","strip-first":"1","strip-prefix":"","strip-suffix":""}', '', '', '0', '0000-00-00 00:00:00', '4', '0']
+        - ['426', plg_system_log, plugin, log, system, '0', '1', '1', '0', '{"name":"plg_system_log","type":"plugin","creationDate":"April 2007","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_LOG_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '5', '0']
+        - ['427', plg_system_redirect, plugin, redirect, system, '0', '0', '1', '0', '{"name":"plg_system_redirect","type":"plugin","creationDate":"April 2009","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_REDIRECT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '6', '0']
+        - ['428', plg_system_remember, plugin, remember, system, '0', '1', '1', '0', '{"name":"plg_system_remember","type":"plugin","creationDate":"April 2007","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_REMEMBER_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '7', '0']
+        - ['429', plg_system_sef, plugin, sef, system, '0', '1', '1', '0', '{"name":"plg_system_sef","type":"plugin","creationDate":"December 2007","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEF_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '8', '0']
+        - ['430', plg_system_logout, plugin, logout, system, '0', '1', '1', '0', '{"name":"plg_system_logout","type":"plugin","creationDate":"April 2009","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SYSTEM_LOGOUT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '3', '0']
+        - ['431', plg_user_contactcreator, plugin, contactcreator, user, '0', '0', '1', '0', '{"name":"plg_user_contactcreator","type":"plugin","creationDate":"August 2009","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CONTACTCREATOR_XML_DESCRIPTION","group":""}', '{"autowebpage":"","category":"34","autopublish":"0"}', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['432', plg_user_joomla, plugin, joomla, user, '0', '1', '1', '0', '{"name":"plg_user_joomla","type":"plugin","creationDate":"December 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2009 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_USER_JOOMLA_XML_DESCRIPTION","group":""}', '{"strong_passwords":"1","autoregister":"1"}', '', '', '0', '0000-00-00 00:00:00', '2', '0']
+        - ['433', plg_user_profile, plugin, profile, user, '0', '0', '1', '0', '{"name":"plg_user_profile","type":"plugin","creationDate":"January 2008","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_USER_PROFILE_XML_DESCRIPTION","group":""}', '{"register-require_address1":"1","register-require_address2":"1","register-require_city":"1","register-require_region":"1","register-require_country":"1","register-require_postal_code":"1","register-require_phone":"1","register-require_website":"1","register-require_favoritebook":"1","register-require_aboutme":"1","register-require_tos":"1","register-require_dob":"1","profile-require_address1":"1","profile-require_address2":"1","profile-require_city":"1","profile-require_region":"1","profile-require_country":"1","profile-require_postal_code":"1","profile-require_phone":"1","profile-require_website":"1","profile-require_favoritebook":"1","profile-require_aboutme":"1","profile-require_tos":"1","profile-require_dob":"1"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['434', plg_extension_joomla, plugin, joomla, extension, '0', '1', '1', '0', '{"name":"plg_extension_joomla","type":"plugin","creationDate":"May 2010","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_EXTENSION_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['435', plg_content_joomla, plugin, joomla, content, '0', '1', '1', '0', '{"name":"plg_content_joomla","type":"plugin","creationDate":"November 2010","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CONTENT_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['436', plg_system_languagecode, plugin, languagecode, system, '0', '0', '1', '0', '{"name":"plg_system_languagecode","type":"plugin","creationDate":"November 2011","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SYSTEM_LANGUAGECODE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '10', '0']
+        - ['437', plg_quickicon_joomlaupdate, plugin, joomlaupdate, quickicon, '0', '1', '1', '0', '{"name":"plg_quickicon_joomlaupdate","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_QUICKICON_JOOMLAUPDATE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['438', plg_quickicon_extensionupdate, plugin, extensionupdate, quickicon, '0', '1', '1', '0', '{"name":"plg_quickicon_extensionupdate","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_QUICKICON_EXTENSIONUPDATE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['439', plg_captcha_recaptcha, plugin, recaptcha, captcha, '0', '0', '1', '0', '{"name":"plg_captcha_recaptcha","type":"plugin","creationDate":"December 2011","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CAPTCHA_RECAPTCHA_XML_DESCRIPTION","group":""}', '{"public_key":"","private_key":"","theme":"clean"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['440', plg_system_highlight, plugin, highlight, system, '0', '1', '1', '0', '{"name":"plg_system_highlight","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SYSTEM_HIGHLIGHT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '7', '0']
+        - ['441', plg_content_finder, plugin, finder, content, '0', '0', '1', '0', '{"name":"plg_content_finder","type":"plugin","creationDate":"December 2011","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_CONTENT_FINDER_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['442', plg_finder_categories, plugin, categories, finder, '0', '1', '1', '0', '{"name":"plg_finder_categories","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_CATEGORIES_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '1', '0']
+        - ['443', plg_finder_contacts, plugin, contacts, finder, '0', '1', '1', '0', '{"name":"plg_finder_contacts","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_CONTACTS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '2', '0']
+        - ['444', plg_finder_content, plugin, content, finder, '0', '1', '1', '0', '{"name":"plg_finder_content","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_CONTENT_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '3', '0']
+        - ['445', plg_finder_newsfeeds, plugin, newsfeeds, finder, '0', '1', '1', '0', '{"name":"plg_finder_newsfeeds","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_NEWSFEEDS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '4', '0']
+        - ['446', plg_finder_weblinks, plugin, weblinks, finder, '0', '1', '1', '0', '{"name":"plg_finder_weblinks","type":"plugin","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_WEBLINKS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '5', '0']
+        - ['447', plg_finder_tags, plugin, tags, finder, '0', '1', '1', '0', '{"name":"plg_finder_tags","type":"plugin","creationDate":"February 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_FINDER_TAGS_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['448', plg_twofactorauth_totp, plugin, totp, twofactorauth, '0', '0', '1', '0', '{"name":"plg_twofactorauth_totp","type":"plugin","creationDate":"August 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"PLG_TWOFACTORAUTH_TOTP_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['449', plg_authentication_cookie, plugin, cookie, authentication, '0', '1', '1', '0', '{"name":"plg_authentication_cookie","type":"plugin","creationDate":"July 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_AUTH_COOKIE_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['450', plg_twofactorauth_yubikey, plugin, yubikey, twofactorauth, '0', '0', '1', '0', '{"name":"plg_twofactorauth_yubikey","type":"plugin","creationDate":"September 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"PLG_TWOFACTORAUTH_YUBIKEY_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['503', beez3, template, beez3, '', '0', '1', '1', '0', '{"name":"beez3","type":"template","creationDate":"25 November 2009","author":"Angie Radtke","copyright":"Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.","authorEmail":"a.radtke@derauftritt.de","authorUrl":"http:\/\/www.der-auftritt.de","version":"3.1.0","description":"TPL_BEEZ3_XML_DESCRIPTION","group":""}', '{"wrapperSmall":"53","wrapperLarge":"72","sitetitle":"","sitedescription":"","navposition":"center","templatecolor":"nature"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['504', hathor, template, hathor, '', '1', '1', '1', '0', '{"name":"hathor","type":"template","creationDate":"May 2010","author":"Andrea Tarr","copyright":"Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.","authorEmail":"hathor@tarrconsulting.com","authorUrl":"http:\/\/www.tarrconsulting.com","version":"3.0.0","description":"TPL_HATHOR_XML_DESCRIPTION","group":""}', '{"showSiteName":"0","colourChoice":"0","boldText":"0"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['506', protostar, template, protostar, '', '0', '1', '1', '0', '{"name":"protostar","type":"template","creationDate":"4\/30\/2012","author":"Kyle Ledbetter","copyright":"Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"","version":"1.0","description":"TPL_PROTOSTAR_XML_DESCRIPTION","group":""}', '{"templateColor":"","logoFile":"","googleFont":"1","googleFontName":"Open+Sans","fluidContainer":"0"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['507', isis, template, isis, '', '1', '1', '1', '0', '{"name":"isis","type":"template","creationDate":"3\/30\/2012","author":"Kyle Ledbetter","copyright":"Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"","version":"1.0","description":"TPL_ISIS_XML_DESCRIPTION","group":""}', '{"templateColor":"","logoFile":""}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['600', 'English (United Kingdom)', language, en-GB, '', '0', '1', '1', '0', '{"name":"English (United Kingdom)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.2","description":"en-GB site language","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['601', 'English (United Kingdom)', language, en-GB, '', '1', '1', '1', '0', '{"name":"English (United Kingdom)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.2","description":"en-GB administrator language","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['700', files_joomla, file, joomla, '', '0', '1', '1', '0', '{"name":"files_joomla","type":"file","creationDate":"February 2014","author":"Joomla! Project","copyright":"(C) 2005 - 2014 Open Source Matters. All rights reserved","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.3-dev","description":"FILES_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+'#__languages':
+    name: '#__languages'
+    from:
+        - '#__languages'
+    columns:
+        lang_id: { Field: lang_id, Type: 'int(11) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [lang_id] }
+        lang_code: { Field: lang_code, Type: char(7), 'Null': NO, Default: null, Extra: '', Comment: '', From: [lang_code] }
+        title: { Field: title, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: '', From: [title] }
+        title_native: { Field: title_native, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: '', From: [title_native] }
+        sef: { Field: sef, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: '', From: [sef] }
+        image: { Field: image, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: '', From: [image] }
+        description: { Field: description, Type: varchar(512), 'Null': NO, Default: null, Extra: '', Comment: '', From: [description] }
+        metakey: { Field: metakey, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [metakey] }
+        metadesc: { Field: metadesc, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [metadesc] }
+        sitename: { Field: sitename, Type: varchar(1024), 'Null': NO, Default: '', Extra: '', Comment: '', From: [sitename] }
+        published: { Field: published, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [published] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [access] }
+        ordering: { Field: ordering, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [ordering] }
+    index:
+        - { Table: '#__languages', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: lang_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__languages', Non_unique: '0', Key_name: idx_sef, Seq_in_index: '1', Column_name: sef, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__languages', Non_unique: '0', Key_name: idx_image, Seq_in_index: '1', Column_name: image, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__languages', Non_unique: '0', Key_name: idx_langcode, Seq_in_index: '1', Column_name: lang_code, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__languages', Non_unique: '1', Key_name: idx_access, Seq_in_index: '1', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__languages', Non_unique: '1', Key_name: idx_ordering, Seq_in_index: '1', Column_name: ordering, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', en-GB, 'English (UK)', 'English (UK)', en, en, '', '', '', '', '1', '1', '1']
+'#__menu':
+    name: '#__menu'
+    from:
+        - '#__menu'
+    columns:
+        id: { Field: id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        menutype: { Field: menutype, Type: varchar(24), 'Null': NO, Default: null, Extra: '', Comment: 'The type of menu this item belongs to. FK to #__menu_types.menutype', From: [menutype] }
+        title: { Field: title, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: 'The display title of the menu item.', From: [title] }
+        alias: { Field: alias, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: 'The SEF alias of the menu item.', From: [alias] }
+        note: { Field: note, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [note] }
+        path: { Field: path, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The computed path of the menu item based on the alias field.', From: [path] }
+        link: { Field: link, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The actually link the menu item refers to.', From: [link] }
+        type: { Field: type, Type: varchar(16), 'Null': NO, Default: null, Extra: '', Comment: 'The type of link: Component, URL, Alias, Separator', From: [type] }
+        published: { Field: published, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: 'The published state of the menu link.', From: [published] }
+        parent_id: { Field: parent_id, Type: 'int(10) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: 'The parent menu item in the menu tree.', From: [parent_id] }
+        level: { Field: level, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'The relative level in the tree.', From: [level] }
+        component_id: { Field: component_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'FK to #__extensions.id', From: [component_id] }
+        checked_out: { Field: checked_out, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'FK to #__users.id', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: timestamp, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: 'The time the menu item was checked out.', From: [checked_out_time] }
+        browserNav: { Field: browserNav, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: 'The click behaviour of the link.', From: [browserNav] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'The access level required to view the menu item.', From: [access] }
+        img: { Field: img, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: 'The image of the menu item.', From: [img] }
+        template_style_id: { Field: template_style_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [template_style_id] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded data for the menu item.', From: [params] }
+        lft: { Field: lft, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set lft.', From: [lft] }
+        rgt: { Field: rgt, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set rgt.', From: [rgt] }
+        home: { Field: home, Type: 'tinyint(3) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Indicates if this menu item is the home or default page.', From: [home] }
+        language: { Field: language, Type: char(7), 'Null': NO, Default: '', Extra: '', Comment: '', From: [language] }
+        client_id: { Field: client_id, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [client_id] }
+    index:
+        - { Table: '#__menu', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '0', Key_name: idx_client_id_parent_id_alias_language, Seq_in_index: '1', Column_name: client_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '0', Key_name: idx_client_id_parent_id_alias_language, Seq_in_index: '2', Column_name: parent_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '0', Key_name: idx_client_id_parent_id_alias_language, Seq_in_index: '3', Column_name: alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '0', Key_name: idx_client_id_parent_id_alias_language, Seq_in_index: '4', Column_name: language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_componentid, Seq_in_index: '1', Column_name: component_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_componentid, Seq_in_index: '2', Column_name: menutype, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_componentid, Seq_in_index: '3', Column_name: published, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_componentid, Seq_in_index: '4', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_menutype, Seq_in_index: '1', Column_name: menutype, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '1', Column_name: lft, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '2', Column_name: rgt, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_alias, Seq_in_index: '1', Column_name: alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_path, Seq_in_index: '1', Column_name: path, Sub_part: '255', 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu', Non_unique: '1', Key_name: idx_language, Seq_in_index: '1', Column_name: language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '', Menu_Item_Root, root, '', '', '', '', '1', '0', '0', '0', '0', '0000-00-00 00:00:00', '0', '0', '', '0', '', '0', '7', '0', '*', '0']
+        - ['16', menu, com_redirect, Redirect, '', Redirect, 'index.php?option=com_redirect', component, '0', '1', '1', '24', '0', '0000-00-00 00:00:00', '0', '0', 'class:redirect', '0', '', '1', '2', '0', '*', '1']
+        - ['23', main, com_tags, Tags, '', Tags, 'index.php?option=com_tags', component, '0', '1', '1', '29', '0', '0000-00-00 00:00:00', '0', '1', 'class:tags', '0', '', '3', '4', '0', '', '1']
+        - ['101', mainmenu, Home, home, '', home, 'index.php?option=com_content&view=featured', component, '1', '1', '1', '22', '0', '0000-00-00 00:00:00', '0', '1', '', '0', '{"featured_categories":[""],"layout_type":"blog","num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","multi_column_order":"1","orderby_pri":"","orderby_sec":"front","order_date":"","show_pagination":"2","show_pagination_results":"1","show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_readmore":"","show_readmore_title":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_noauth":"","show_feed_link":"1","feed_summary":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":1,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', '5', '6', '1', '*', '0']
+'#__menu_types':
+    name: '#__menu_types'
+    from:
+        - '#__menu_types'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        menutype: { Field: menutype, Type: varchar(24), 'Null': NO, Default: null, Extra: '', Comment: '', From: [menutype] }
+        title: { Field: title, Type: varchar(48), 'Null': NO, Default: null, Extra: '', Comment: '', From: [title] }
+        description: { Field: description, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [description] }
+    index:
+        - { Table: '#__menu_types', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__menu_types', Non_unique: '0', Key_name: idx_menutype, Seq_in_index: '1', Column_name: menutype, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', mainmenu, 'Main Menu', 'The main menu for the site']
+'#__modules':
+    name: '#__modules'
+    from:
+        - '#__modules'
+    columns:
+        id: { Field: id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        asset_id: { Field: asset_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'FK to the #__assets table.', From: [asset_id] }
+        title: { Field: title, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [title] }
+        note: { Field: note, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [note] }
+        content: { Field: content, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [content] }
+        ordering: { Field: ordering, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [ordering] }
+        position: { Field: position, Type: varchar(50), 'Null': NO, Default: '', Extra: '', Comment: '', From: [position] }
+        checked_out: { Field: checked_out, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [checked_out_time] }
+        publish_up: { Field: publish_up, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_up] }
+        publish_down: { Field: publish_down, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_down] }
+        published: { Field: published, Type: tinyint(1), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [published] }
+        module: { Field: module, Type: varchar(50), 'Null': YES, Default: null, Extra: '', Comment: '', From: [module] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [access] }
+        showtitle: { Field: showtitle, Type: 'tinyint(3) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: '', From: [showtitle] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+        client_id: { Field: client_id, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [client_id] }
+        language: { Field: language, Type: char(7), 'Null': NO, Default: null, Extra: '', Comment: '', From: [language] }
+    index:
+        - { Table: '#__modules', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__modules', Non_unique: '1', Key_name: published, Seq_in_index: '1', Column_name: published, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__modules', Non_unique: '1', Key_name: published, Seq_in_index: '2', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__modules', Non_unique: '1', Key_name: newsfeeds, Seq_in_index: '1', Column_name: module, Sub_part: null, 'Null': YES, Comment: '', Index_comment: '' }
+        - { Table: '#__modules', Non_unique: '1', Key_name: newsfeeds, Seq_in_index: '2', Column_name: published, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__modules', Non_unique: '1', Key_name: idx_language, Seq_in_index: '1', Column_name: language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '55', 'Main Menu', '', '', '1', position-7, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_menu, '1', '1', '{"menutype":"mainmenu","startLevel":"0","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid"}', '0', '*']
+        - ['2', '56', Login, '', '', '1', login, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_login, '1', '1', '', '1', '*']
+        - ['8', '59', Toolbar, '', '', '1', toolbar, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_toolbar, '3', '1', '', '1', '*']
+        - ['9', '60', 'Quick Icons', '', '', '1', icon, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_quickicon, '3', '1', '', '1', '*']
+        - ['10', '61', 'Logged-in Users', '', '', '2', cpanel, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_logged, '3', '1', '{"count":"5","name":"1","layout":"_:default","moduleclass_sfx":"","cache":"0","automatic_title":"1"}', '1', '*']
+        - ['12', '62', 'Admin Menu', '', '', '1', menu, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_menu, '3', '1', '{"layout":"","moduleclass_sfx":"","shownew":"1","showhelp":"1","cache":"0"}', '1', '*']
+        - ['13', '63', 'Admin Submenu', '', '', '1', submenu, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_submenu, '3', '1', '', '1', '*']
+        - ['15', '65', Title, '', '', '1', title, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_title, '3', '1', '', '1', '*']
+        - ['16', '66', 'Login Form', '', '', '7', position-7, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_login, '1', '1', '{"greeting":"1","name":"0"}', '0', '*']
+        - ['17', '67', Breadcrumbs, '', '', '1', position-2, '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', mod_breadcrumbs, '1', '1', '{"moduleclass_sfx":"","showHome":"1","homeText":"","showComponent":"1","separator":"","cache":"1","cache_time":"900","cachemode":"itemid"}', '0', '*']
+'#__modules_menu':
+    name: '#__modules_menu'
+    from:
+        - '#__modules_menu'
+    columns:
+        moduleid: { Field: moduleid, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [moduleid] }
+        menuid: { Field: menuid, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [menuid] }
+    index:
+        - { Table: '#__modules_menu', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: moduleid, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__modules_menu', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: menuid, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '0']
+        - ['2', '0']
+        - ['6', '0']
+        - ['7', '0']
+        - ['8', '0']
+        - ['9', '0']
+        - ['10', '0']
+        - ['12', '0']
+        - ['13', '0']
+        - ['15', '0']
+        - ['16', '0']
+        - ['17', '0']
+'#__overrider':
+    name: '#__overrider'
+    from:
+        - '#__overrider'
+    columns:
+        id: { Field: id, Type: int(10), 'Null': NO, Default: null, Extra: auto_increment, Comment: 'Primary Key', From: [id] }
+        constant: { Field: constant, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [constant] }
+        string: { Field: string, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [string] }
+        file: { Field: file, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [file] }
+    index:
+        - { Table: '#__overrider', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__redirect_links':
+    name: '#__redirect_links'
+    from:
+        - '#__redirect_links'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        old_url: { Field: old_url, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [old_url] }
+        new_url: { Field: new_url, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [new_url] }
+        referer: { Field: referer, Type: varchar(150), 'Null': NO, Default: null, Extra: '', Comment: '', From: [referer] }
+        comment: { Field: comment, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [comment] }
+        hits: { Field: hits, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [hits] }
+        published: { Field: published, Type: tinyint(4), 'Null': NO, Default: null, Extra: '', Comment: '', From: [published] }
+        created_date: { Field: created_date, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [created_date] }
+        modified_date: { Field: modified_date, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [modified_date] }
+    index:
+        - { Table: '#__redirect_links', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__redirect_links', Non_unique: '0', Key_name: idx_link_old, Seq_in_index: '1', Column_name: old_url, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__redirect_links', Non_unique: '1', Key_name: idx_link_modifed, Seq_in_index: '1', Column_name: modified_date, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__schemas':
+    name: '#__schemas'
+    from:
+        - '#__schemas'
+    columns:
+        extension_id: { Field: extension_id, Type: int(11), 'Null': NO, Default: null, Extra: '', Comment: '', From: [extension_id] }
+        version_id: { Field: version_id, Type: varchar(20), 'Null': NO, Default: null, Extra: '', Comment: '', From: [version_id] }
+    index:
+        - { Table: '#__schemas', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: extension_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__schemas', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: version_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['700', 3.2.2-2014-01-23]
+'#__session':
+    name: '#__session'
+    from:
+        - '#__session'
+    columns:
+        session_id: { Field: session_id, Type: varchar(200), 'Null': NO, Default: '', Extra: '', Comment: '', From: [session_id] }
+        client_id: { Field: client_id, Type: 'tinyint(3) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [client_id] }
+        guest: { Field: guest, Type: 'tinyint(4) unsigned', 'Null': YES, Default: '1', Extra: '', Comment: '', From: [guest] }
+        time: { Field: time, Type: varchar(14), 'Null': YES, Default: '', Extra: '', Comment: '', From: [time] }
+        data: { Field: data, Type: mediumtext, 'Null': YES, Default: null, Extra: '', Comment: '', From: [data] }
+        userid: { Field: userid, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [userid] }
+        username: { Field: username, Type: varchar(150), 'Null': YES, Default: '', Extra: '', Comment: '', From: [username] }
+    index:
+        - { Table: '#__session', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: session_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__session', Non_unique: '1', Key_name: userid, Seq_in_index: '1', Column_name: userid, Sub_part: null, 'Null': YES, Comment: '', Index_comment: '' }
+        - { Table: '#__session', Non_unique: '1', Key_name: time, Seq_in_index: '1', Column_name: time, Sub_part: null, 'Null': YES, Comment: '', Index_comment: '' }
+'#__tags':
+    name: '#__tags'
+    from:
+        - '#__tags'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        parent_id: { Field: parent_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [parent_id] }
+        lft: { Field: lft, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [lft] }
+        rgt: { Field: rgt, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [rgt] }
+        level: { Field: level, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [level] }
+        path: { Field: path, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [path] }
+        title: { Field: title, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [title] }
+        alias: { Field: alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [alias] }
+        note: { Field: note, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [note] }
+        description: { Field: description, Type: mediumtext, 'Null': NO, Default: null, Extra: '', Comment: '', From: [description] }
+        published: { Field: published, Type: tinyint(1), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [published] }
+        checked_out: { Field: checked_out, Type: 'int(11) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [checked_out_time] }
+        access: { Field: access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [access] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+        metadesc: { Field: metadesc, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The meta description for the page.', From: [metadesc] }
+        metakey: { Field: metakey, Type: varchar(1024), 'Null': NO, Default: null, Extra: '', Comment: 'The meta keywords for the page.', From: [metakey] }
+        metadata: { Field: metadata, Type: varchar(2048), 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded metadata properties.', From: [metadata] }
+        created_user_id: { Field: created_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [created_user_id] }
+        created_time: { Field: created_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [created_time] }
+        created_by_alias: { Field: created_by_alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [created_by_alias] }
+        modified_user_id: { Field: modified_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [modified_user_id] }
+        modified_time: { Field: modified_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [modified_time] }
+        images: { Field: images, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [images] }
+        urls: { Field: urls, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [urls] }
+        hits: { Field: hits, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [hits] }
+        language: { Field: language, Type: char(7), 'Null': NO, Default: null, Extra: '', Comment: '', From: [language] }
+        version: { Field: version, Type: 'int(10) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: '', From: [version] }
+        publish_up: { Field: publish_up, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_up] }
+        publish_down: { Field: publish_down, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_down] }
+    index:
+        - { Table: '#__tags', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: tag_idx, Seq_in_index: '1', Column_name: published, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: tag_idx, Seq_in_index: '2', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_access, Seq_in_index: '1', Column_name: access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_checkout, Seq_in_index: '1', Column_name: checked_out, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_path, Seq_in_index: '1', Column_name: path, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '1', Column_name: lft, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_left_right, Seq_in_index: '2', Column_name: rgt, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_alias, Seq_in_index: '1', Column_name: alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__tags', Non_unique: '1', Key_name: idx_language, Seq_in_index: '1', Column_name: language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '0', '0', '1', '0', '', ROOT, root, '', '', '1', '0', '0000-00-00 00:00:00', '1', '', '', '', '', '0', '2011-01-01 00:00:01', '', '0', '0000-00-00 00:00:00', '', '', '0', '*', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00']
+'#__template_styles':
+    name: '#__template_styles'
+    from:
+        - '#__template_styles'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        template: { Field: template, Type: varchar(50), 'Null': NO, Default: '', Extra: '', Comment: '', From: [template] }
+        client_id: { Field: client_id, Type: 'tinyint(1) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [client_id] }
+        home: { Field: home, Type: char(7), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [home] }
+        title: { Field: title, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [title] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+    index:
+        - { Table: '#__template_styles', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__template_styles', Non_unique: '1', Key_name: idx_template, Seq_in_index: '1', Column_name: template, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__template_styles', Non_unique: '1', Key_name: idx_home, Seq_in_index: '1', Column_name: home, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['4', beez3, '0', '0', 'Beez3 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management","navposition":"left","templatecolor":"personal","html5":"0"}']
+        - ['5', hathor, '1', '0', 'Hathor - Default', '{"showSiteName":"0","colourChoice":"","boldText":"0"}']
+        - ['7', protostar, '0', '1', 'protostar - Default', '{"templateColor":"","logoFile":"","googleFont":"1","googleFontName":"Open+Sans","fluidContainer":"0"}']
+        - ['8', isis, '1', '1', 'isis - Default', '{"templateColor":"","logoFile":""}']
+'#__ucm_base':
+    name: '#__ucm_base'
+    from:
+        - '#__ucm_base'
+    columns:
+        ucm_id: { Field: ucm_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_id] }
+        ucm_item_id: { Field: ucm_item_id, Type: int(10), 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_item_id] }
+        ucm_type_id: { Field: ucm_type_id, Type: int(11), 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_type_id] }
+        ucm_language_id: { Field: ucm_language_id, Type: int(11), 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_language_id] }
+    index:
+        - { Table: '#__ucm_base', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: ucm_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_base', Non_unique: '1', Key_name: idx_ucm_item_id, Seq_in_index: '1', Column_name: ucm_item_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_base', Non_unique: '1', Key_name: idx_ucm_type_id, Seq_in_index: '1', Column_name: ucm_type_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_base', Non_unique: '1', Key_name: idx_ucm_language_id, Seq_in_index: '1', Column_name: ucm_language_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__ucm_content':
+    name: '#__ucm_content'
+    from:
+        - '#__ucm_content'
+    columns:
+        core_content_id: { Field: core_content_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [core_content_id] }
+        core_type_alias: { Field: core_type_alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: 'FK to the content types table', From: [core_type_alias] }
+        core_title: { Field: core_title, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_title] }
+        core_alias: { Field: core_alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [core_alias] }
+        core_body: { Field: core_body, Type: mediumtext, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_body] }
+        core_state: { Field: core_state, Type: tinyint(1), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_state] }
+        core_checked_out_time: { Field: core_checked_out_time, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [core_checked_out_time] }
+        core_checked_out_user_id: { Field: core_checked_out_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_checked_out_user_id] }
+        core_access: { Field: core_access, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_access] }
+        core_params: { Field: core_params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_params] }
+        core_featured: { Field: core_featured, Type: 'tinyint(4) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_featured] }
+        core_metadata: { Field: core_metadata, Type: varchar(2048), 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded metadata properties.', From: [core_metadata] }
+        core_created_user_id: { Field: core_created_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_created_user_id] }
+        core_created_by_alias: { Field: core_created_by_alias, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [core_created_by_alias] }
+        core_created_time: { Field: core_created_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [core_created_time] }
+        core_modified_user_id: { Field: core_modified_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Most recent user that modified', From: [core_modified_user_id] }
+        core_modified_time: { Field: core_modified_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [core_modified_time] }
+        core_language: { Field: core_language, Type: char(7), 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_language] }
+        core_publish_up: { Field: core_publish_up, Type: datetime, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_publish_up] }
+        core_publish_down: { Field: core_publish_down, Type: datetime, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_publish_down] }
+        core_content_item_id: { Field: core_content_item_id, Type: 'int(10) unsigned', 'Null': YES, Default: null, Extra: '', Comment: 'ID from the individual type table', From: [core_content_item_id] }
+        asset_id: { Field: asset_id, Type: 'int(10) unsigned', 'Null': YES, Default: null, Extra: '', Comment: 'FK to the #__assets table.', From: [asset_id] }
+        core_images: { Field: core_images, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_images] }
+        core_urls: { Field: core_urls, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_urls] }
+        core_hits: { Field: core_hits, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_hits] }
+        core_version: { Field: core_version, Type: 'int(10) unsigned', 'Null': NO, Default: '1', Extra: '', Comment: '', From: [core_version] }
+        core_ordering: { Field: core_ordering, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_ordering] }
+        core_metakey: { Field: core_metakey, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_metakey] }
+        core_metadesc: { Field: core_metadesc, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [core_metadesc] }
+        core_catid: { Field: core_catid, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [core_catid] }
+        core_xreference: { Field: core_xreference, Type: varchar(50), 'Null': NO, Default: null, Extra: '', Comment: 'A reference to enable linkages to external data sets.', From: [core_xreference] }
+        core_type_id: { Field: core_type_id, Type: 'int(10) unsigned', 'Null': YES, Default: null, Extra: '', Comment: '', From: [core_type_id] }
+    index:
+        - { Table: '#__ucm_content', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: core_content_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: tag_idx, Seq_in_index: '1', Column_name: core_state, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: tag_idx, Seq_in_index: '2', Column_name: core_access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_access, Seq_in_index: '1', Column_name: core_access, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_alias, Seq_in_index: '1', Column_name: core_alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_language, Seq_in_index: '1', Column_name: core_language, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_title, Seq_in_index: '1', Column_name: core_title, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_modified_time, Seq_in_index: '1', Column_name: core_modified_time, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_created_time, Seq_in_index: '1', Column_name: core_created_time, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_content_type, Seq_in_index: '1', Column_name: core_type_alias, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_core_modified_user_id, Seq_in_index: '1', Column_name: core_modified_user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_core_checked_out_user_id, Seq_in_index: '1', Column_name: core_checked_out_user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_core_created_user_id, Seq_in_index: '1', Column_name: core_created_user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_content', Non_unique: '1', Key_name: idx_core_type_id, Seq_in_index: '1', Column_name: core_type_id, Sub_part: null, 'Null': YES, Comment: '', Index_comment: '' }
+'#__ucm_history':
+    name: '#__ucm_history'
+    from:
+        - '#__ucm_history'
+    columns:
+        version_id: { Field: version_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [version_id] }
+        ucm_item_id: { Field: ucm_item_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_item_id] }
+        ucm_type_id: { Field: ucm_type_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: '', Comment: '', From: [ucm_type_id] }
+        version_note: { Field: version_note, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: 'Optional version name', From: [version_note] }
+        save_date: { Field: save_date, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [save_date] }
+        editor_user_id: { Field: editor_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [editor_user_id] }
+        character_count: { Field: character_count, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Number of characters in this version.', From: [character_count] }
+        sha1_hash: { Field: sha1_hash, Type: varchar(50), 'Null': NO, Default: '', Extra: '', Comment: 'SHA1 hash of the version_data column.', From: [sha1_hash] }
+        version_data: { Field: version_data, Type: mediumtext, 'Null': NO, Default: null, Extra: '', Comment: 'json-encoded string of version data', From: [version_data] }
+        keep_forever: { Field: keep_forever, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: '0=auto delete; 1=keep', From: [keep_forever] }
+    index:
+        - { Table: '#__ucm_history', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: version_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_history', Non_unique: '1', Key_name: idx_ucm_item_id, Seq_in_index: '1', Column_name: ucm_type_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_history', Non_unique: '1', Key_name: idx_ucm_item_id, Seq_in_index: '2', Column_name: ucm_item_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__ucm_history', Non_unique: '1', Key_name: idx_save_date, Seq_in_index: '1', Column_name: save_date, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__update_sites':
+    name: '#__update_sites'
+    from:
+        - '#__update_sites'
+    columns:
+        update_site_id: { Field: update_site_id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [update_site_id] }
+        name: { Field: name, Type: varchar(100), 'Null': YES, Default: '', Extra: '', Comment: '', From: [name] }
+        type: { Field: type, Type: varchar(20), 'Null': YES, Default: '', Extra: '', Comment: '', From: [type] }
+        location: { Field: location, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [location] }
+        enabled: { Field: enabled, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [enabled] }
+        last_check_timestamp: { Field: last_check_timestamp, Type: bigint(20), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [last_check_timestamp] }
+        extra_query: { Field: extra_query, Type: varchar(1000), 'Null': YES, Default: '', Extra: '', Comment: '', From: [extra_query] }
+    index:
+        - { Table: '#__update_sites', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_site_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', 'Joomla Core', collection, 'http://update.joomla.org/core/list.xml', '1', '1393073419', '']
+        - ['2', 'Joomla Extension Directory', collection, 'http://update.joomla.org/jed/list.xml', '1', '1393073419', '']
+        - ['3', 'Accredited Joomla! Translations', collection, 'http://update.joomla.org/language/translationlist_3.xml', '1', '1393073419', '']
+'#__update_sites_extensions':
+    name: '#__update_sites_extensions'
+    from:
+        - '#__update_sites_extensions'
+    columns:
+        update_site_id: { Field: update_site_id, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [update_site_id] }
+        extension_id: { Field: extension_id, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [extension_id] }
+    index:
+        - { Table: '#__update_sites_extensions', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_site_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__update_sites_extensions', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: extension_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '700']
+        - ['2', '700']
+        - ['3', '600']
+'#__updates':
+    name: '#__updates'
+    from:
+        - '#__updates'
+    columns:
+        update_id: { Field: update_id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [update_id] }
+        update_site_id: { Field: update_site_id, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [update_site_id] }
+        extension_id: { Field: extension_id, Type: int(11), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [extension_id] }
+        name: { Field: name, Type: varchar(100), 'Null': YES, Default: '', Extra: '', Comment: '', From: [name] }
+        description: { Field: description, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [description] }
+        element: { Field: element, Type: varchar(100), 'Null': YES, Default: '', Extra: '', Comment: '', From: [element] }
+        type: { Field: type, Type: varchar(20), 'Null': YES, Default: '', Extra: '', Comment: '', From: [type] }
+        folder: { Field: folder, Type: varchar(20), 'Null': YES, Default: '', Extra: '', Comment: '', From: [folder] }
+        client_id: { Field: client_id, Type: tinyint(3), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [client_id] }
+        version: { Field: version, Type: varchar(32), 'Null': YES, Default: '', Extra: '', Comment: '', From: [version] }
+        data: { Field: data, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [data] }
+        detailsurl: { Field: detailsurl, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [detailsurl] }
+        infourl: { Field: infourl, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [infourl] }
+        extra_query: { Field: extra_query, Type: varchar(1000), 'Null': YES, Default: '', Extra: '', Comment: '', From: [extra_query] }
+    index:
+        - { Table: '#__updates', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '3', '0', Malay, '', pkg_ms-MY, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ms-MY_details.xml', '', '']
+        - ['2', '3', '0', Romanian, '', pkg_ro-RO, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ro-RO_details.xml', '', '']
+        - ['3', '3', '0', Flemish, '', pkg_nl-BE, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/nl-BE_details.xml', '', '']
+        - ['4', '3', '0', 'Chinese Traditional', '', pkg_zh-TW, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/zh-TW_details.xml', '', '']
+        - ['5', '3', '0', French, '', pkg_fr-FR, package, '', '0', 3.2.2.2, '', 'http://update.joomla.org/language/details3/fr-FR_details.xml', '', '']
+        - ['6', '3', '0', German, '', pkg_de-DE, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/de-DE_details.xml', '', '']
+        - ['7', '3', '0', Greek, '', pkg_el-GR, package, '', '0', 3.2.0.1, '', 'http://update.joomla.org/language/details3/el-GR_details.xml', '', '']
+        - ['8', '3', '0', Japanese, '', pkg_ja-JP, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ja-JP_details.xml', '', '']
+        - ['9', '3', '0', Hebrew, '', pkg_he-IL, package, '', '0', 3.1.1.1, '', 'http://update.joomla.org/language/details3/he-IL_details.xml', '', '']
+        - ['10', '3', '0', Hungarian, '', pkg_hu-HU, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/hu-HU_details.xml', '', '']
+        - ['11', '3', '0', Afrikaans, '', pkg_af-ZA, package, '', '0', 3.2.0.1, '', 'http://update.joomla.org/language/details3/af-ZA_details.xml', '', '']
+        - ['12', '3', '0', 'Arabic Unitag', '', pkg_ar-AA, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ar-AA_details.xml', '', '']
+        - ['13', '3', '0', Belarusian, '', pkg_be-BY, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/be-BY_details.xml', '', '']
+        - ['14', '3', '0', Bulgarian, '', pkg_bg-BG, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/bg-BG_details.xml', '', '']
+        - ['15', '3', '0', Catalan, '', pkg_ca-ES, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ca-ES_details.xml', '', '']
+        - ['16', '3', '0', 'Chinese Simplified', '', pkg_zh-CN, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/zh-CN_details.xml', '', '']
+        - ['17', '3', '0', Croatian, '', pkg_hr-HR, package, '', '0', 3.1.5.1, '', 'http://update.joomla.org/language/details3/hr-HR_details.xml', '', '']
+        - ['18', '3', '0', Czech, '', pkg_cs-CZ, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/cs-CZ_details.xml', '', '']
+        - ['19', '3', '0', Danish, '', pkg_da-DK, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/da-DK_details.xml', '', '']
+        - ['20', '3', '0', Dutch, '', pkg_nl-NL, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/nl-NL_details.xml', '', '']
+        - ['21', '3', '0', 'English AU', '', pkg_en-AU, package, '', '0', 3.1.0.1, '', 'http://update.joomla.org/language/details3/en-AU_details.xml', '', '']
+        - ['22', '3', '0', 'English US', '', pkg_en-US, package, '', '0', 3.1.0.1, '', 'http://update.joomla.org/language/details3/en-US_details.xml', '', '']
+        - ['23', '3', '0', Estonian, '', pkg_et-EE, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/et-EE_details.xml', '', '']
+        - ['24', '3', '0', Italian, '', pkg_it-IT, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/it-IT_details.xml', '', '']
+        - ['25', '3', '0', Korean, '', pkg_ko-KR, package, '', '0', 3.2.1.0, '', 'http://update.joomla.org/language/details3/ko-KR_details.xml', '', '']
+        - ['26', '3', '0', Latvian, '', pkg_lv-LV, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/lv-LV_details.xml', '', '']
+        - ['27', '3', '0', Macedonian, '', pkg_mk-MK, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/mk-MK_details.xml', '', '']
+        - ['28', '3', '0', 'Norwegian Bokmal', '', pkg_nb-NO, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', '']
+        - ['29', '3', '0', Persian, '', pkg_fa-IR, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', '']
+        - ['30', '3', '0', Polish, '', pkg_pl-PL, package, '', '0', 3.2.2.2, '', 'http://update.joomla.org/language/details3/pl-PL_details.xml', '', '']
+        - ['31', '3', '0', Russian, '', pkg_ru-RU, package, '', '0', 3.2.1.5, '', 'http://update.joomla.org/language/details3/ru-RU_details.xml', '', '']
+        - ['32', '3', '0', Slovak, '', pkg_sk-SK, package, '', '0', 3.2.2.2, '', 'http://update.joomla.org/language/details3/sk-SK_details.xml', '', '']
+        - ['33', '3', '0', Swedish, '', pkg_sv-SE, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/sv-SE_details.xml', '', '']
+        - ['34', '3', '0', Syriac, '', pkg_sy-IQ, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/sy-IQ_details.xml', '', '']
+        - ['35', '3', '0', Tamil, '', pkg_ta-IN, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/ta-IN_details.xml', '', '']
+        - ['36', '3', '0', Thai, '', pkg_th-TH, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/th-TH_details.xml', '', '']
+        - ['37', '3', '0', Turkish, '', pkg_tr-TR, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/tr-TR_details.xml', '', '']
+        - ['38', '3', '0', Ukrainian, '', pkg_uk-UA, package, '', '0', 3.2.0.6, '', 'http://update.joomla.org/language/details3/uk-UA_details.xml', '', '']
+        - ['39', '3', '0', Uyghur, '', pkg_ug-CN, package, '', '0', 3.2.0.1, '', 'http://update.joomla.org/language/details3/ug-CN_details.xml', '', '']
+        - ['40', '3', '0', Albanian, '', pkg_sq-AL, package, '', '0', 3.1.1.1, '', 'http://update.joomla.org/language/details3/sq-AL_details.xml', '', '']
+        - ['41', '3', '0', 'Portuguese Brazil', '', pkg_pt-BR, package, '', '0', 3.0.2.1, '', 'http://update.joomla.org/language/details3/pt-BR_details.xml', '', '']
+        - ['42', '3', '0', 'Serbian Latin', '', pkg_sr-YU, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/sr-YU_details.xml', '', '']
+        - ['43', '3', '0', Spanish, '', pkg_es-ES, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/es-ES_details.xml', '', '']
+        - ['44', '3', '0', Bosnian, '', pkg_bs-BA, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/bs-BA_details.xml', '', '']
+        - ['45', '3', '0', 'Serbian Cyrillic', '', pkg_sr-RS, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/sr-RS_details.xml', '', '']
+        - ['46', '3', '0', Vietnamese, '', pkg_vi-VN, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/vi-VN_details.xml', '', '']
+        - ['47', '3', '0', 'Bahasa Indonesia', '', pkg_id-ID, package, '', '0', 3.1.4.1, '', 'http://update.joomla.org/language/details3/id-ID_details.xml', '', '']
+        - ['48', '3', '0', Finnish, '', pkg_fi-FI, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/fi-FI_details.xml', '', '']
+        - ['49', '3', '0', Swahili, '', pkg_sw-KE, package, '', '0', 3.2.2.1, '', 'http://update.joomla.org/language/details3/sw-KE_details.xml', '', '']
+        - ['50', '3', '0', Montenegrin, '', pkg_srp-ME, package, '', '0', 3.2.1.1, '', 'http://update.joomla.org/language/details3/srp-ME_details.xml', '', '']
+'#__user_keys':
+    name: '#__user_keys'
+    from:
+        - '#__user_keys'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        user_id: { Field: user_id, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [user_id] }
+        token: { Field: token, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [token] }
+        series: { Field: series, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [series] }
+        invalid: { Field: invalid, Type: tinyint(4), 'Null': NO, Default: null, Extra: '', Comment: '', From: [invalid] }
+        time: { Field: time, Type: varchar(200), 'Null': NO, Default: null, Extra: '', Comment: '', From: [time] }
+        uastring: { Field: uastring, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [uastring] }
+    index:
+        - { Table: '#__user_keys', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_keys', Non_unique: '0', Key_name: series, Seq_in_index: '1', Column_name: series, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_keys', Non_unique: '0', Key_name: series_2, Seq_in_index: '1', Column_name: series, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_keys', Non_unique: '0', Key_name: series_3, Seq_in_index: '1', Column_name: series, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_keys', Non_unique: '1', Key_name: user_id, Seq_in_index: '1', Column_name: user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__user_notes':
+    name: '#__user_notes'
+    from:
+        - '#__user_notes'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        user_id: { Field: user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [user_id] }
+        catid: { Field: catid, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [catid] }
+        subject: { Field: subject, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [subject] }
+        body: { Field: body, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [body] }
+        state: { Field: state, Type: tinyint(3), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [state] }
+        checked_out: { Field: checked_out, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [checked_out] }
+        checked_out_time: { Field: checked_out_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [checked_out_time] }
+        created_user_id: { Field: created_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: '', From: [created_user_id] }
+        created_time: { Field: created_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [created_time] }
+        modified_user_id: { Field: modified_user_id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: '', Comment: '', From: [modified_user_id] }
+        modified_time: { Field: modified_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [modified_time] }
+        review_time: { Field: review_time, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [review_time] }
+        publish_up: { Field: publish_up, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_up] }
+        publish_down: { Field: publish_down, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [publish_down] }
+    index:
+        - { Table: '#__user_notes', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_notes', Non_unique: '1', Key_name: idx_user_id, Seq_in_index: '1', Column_name: user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_notes', Non_unique: '1', Key_name: idx_category_id, Seq_in_index: '1', Column_name: catid, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__user_profiles':
+    name: '#__user_profiles'
+    from:
+        - '#__user_profiles'
+    columns:
+        user_id: { Field: user_id, Type: int(11), 'Null': NO, Default: null, Extra: '', Comment: '', From: [user_id] }
+        profile_key: { Field: profile_key, Type: varchar(100), 'Null': NO, Default: null, Extra: '', Comment: '', From: [profile_key] }
+        profile_value: { Field: profile_value, Type: varchar(255), 'Null': NO, Default: null, Extra: '', Comment: '', From: [profile_value] }
+        ordering: { Field: ordering, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [ordering] }
+    index:
+        - { Table: '#__user_profiles', Non_unique: '0', Key_name: idx_user_id_profile_key, Seq_in_index: '1', Column_name: user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_profiles', Non_unique: '0', Key_name: idx_user_id_profile_key, Seq_in_index: '2', Column_name: profile_key, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+'#__user_usergroup_map':
+    name: '#__user_usergroup_map'
+    from:
+        - '#__user_usergroup_map'
+    columns:
+        user_id: { Field: user_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Foreign Key to #__users.id', From: [user_id] }
+        group_id: { Field: group_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Foreign Key to #__usergroups.id', From: [group_id] }
+    index:
+        - { Table: '#__user_usergroup_map', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__user_usergroup_map', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: group_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['330', '8']
+'#__usergroups':
+    name: '#__usergroups'
+    from:
+        - '#__usergroups'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: 'Primary Key', From: [id] }
+        parent_id: { Field: parent_id, Type: 'int(10) unsigned', 'Null': NO, Default: '0', Extra: '', Comment: 'Adjacency List Reference Id', From: [parent_id] }
+        lft: { Field: lft, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set lft.', From: [lft] }
+        rgt: { Field: rgt, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Nested set rgt.', From: [rgt] }
+        title: { Field: title, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [title] }
+    index:
+        - { Table: '#__usergroups', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '0', Key_name: idx_usergroup_parent_title_lookup, Seq_in_index: '1', Column_name: parent_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '0', Key_name: idx_usergroup_parent_title_lookup, Seq_in_index: '2', Column_name: title, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '1', Key_name: idx_usergroup_title_lookup, Seq_in_index: '1', Column_name: title, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '1', Key_name: idx_usergroup_adjacency_lookup, Seq_in_index: '1', Column_name: parent_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '1', Key_name: idx_usergroup_nested_set_lookup, Seq_in_index: '1', Column_name: lft, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__usergroups', Non_unique: '1', Key_name: idx_usergroup_nested_set_lookup, Seq_in_index: '2', Column_name: rgt, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '0', '1', '18', Public]
+        - ['2', '1', '8', '15', Registered]
+        - ['3', '2', '9', '14', Author]
+        - ['4', '3', '10', '13', Editor]
+        - ['5', '4', '11', '12', Publisher]
+        - ['6', '1', '4', '7', Manager]
+        - ['7', '6', '5', '6', Administrator]
+        - ['8', '1', '16', '17', 'Super Users']
+        - ['9', '1', '2', '3', Guest]
+'#__users':
+    name: '#__users'
+    from:
+        - '#__users'
+    columns:
+        id: { Field: id, Type: int(11), 'Null': NO, Default: null, Extra: auto_increment, Comment: '', From: [id] }
+        name: { Field: name, Type: varchar(255), 'Null': NO, Default: '', Extra: '', Comment: '', From: [name] }
+        username: { Field: username, Type: varchar(150), 'Null': NO, Default: '', Extra: '', Comment: '', From: [username] }
+        email: { Field: email, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [email] }
+        password: { Field: password, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [password] }
+        block: { Field: block, Type: tinyint(4), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [block] }
+        sendEmail: { Field: sendEmail, Type: tinyint(4), 'Null': YES, Default: '0', Extra: '', Comment: '', From: [sendEmail] }
+        registerDate: { Field: registerDate, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [registerDate] }
+        lastvisitDate: { Field: lastvisitDate, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: '', From: [lastvisitDate] }
+        activation: { Field: activation, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [activation] }
+        params: { Field: params, Type: text, 'Null': NO, Default: null, Extra: '', Comment: '', From: [params] }
+        lastResetTime: { Field: lastResetTime, Type: datetime, 'Null': NO, Default: '0000-00-00 00:00:00', Extra: '', Comment: 'Date of last password reset', From: [lastResetTime] }
+        resetCount: { Field: resetCount, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: 'Count of password resets since lastResetTime', From: [resetCount] }
+        otpKey: { Field: otpKey, Type: varchar(1000), 'Null': NO, Default: '', Extra: '', Comment: 'Two factor authentication encrypted keys', From: [otpKey] }
+        otep: { Field: otep, Type: varchar(1000), 'Null': NO, Default: '', Extra: '', Comment: 'One time emergency passwords', From: [otep] }
+    index:
+        - { Table: '#__users', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__users', Non_unique: '1', Key_name: idx_name, Seq_in_index: '1', Column_name: name, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__users', Non_unique: '1', Key_name: idx_block, Seq_in_index: '1', Column_name: block, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__users', Non_unique: '1', Key_name: username, Seq_in_index: '1', Column_name: username, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__users', Non_unique: '1', Key_name: email, Seq_in_index: '1', Column_name: email, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['330', 'Super User', admin, asika@asikart.com, $P$D4yxjHN/XFSzSxe4QVBppFuCTAqV8O/, '0', '1', '2014-02-22 12:24:26', '2014-02-22 12:24:29', '0', '', '0000-00-00 00:00:00', '0', '', '']
+'#__viewlevels':
+    name: '#__viewlevels'
+    from:
+        - '#__viewlevels'
+    columns:
+        id: { Field: id, Type: 'int(10) unsigned', 'Null': NO, Default: null, Extra: auto_increment, Comment: 'Primary Key', From: [id] }
+        title: { Field: title, Type: varchar(100), 'Null': NO, Default: '', Extra: '', Comment: '', From: [title] }
+        ordering: { Field: ordering, Type: int(11), 'Null': NO, Default: '0', Extra: '', Comment: '', From: [ordering] }
+        rules: { Field: rules, Type: varchar(5120), 'Null': NO, Default: null, Extra: '', Comment: 'JSON encoded access control.', From: [rules] }
+    index:
+        - { Table: '#__viewlevels', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+        - { Table: '#__viewlevels', Non_unique: '0', Key_name: idx_assetgroup_title_lookup, Seq_in_index: '1', Column_name: title, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', Public, '0', '[1]']
+        - ['2', Registered, '1', '[6,2,8]']
+        - ['3', Special, '2', '[6,3,8]']
+        - ['5', Guest, '0', '[9]']
+        - ['6', 'Super Users', '0', '[8]']
