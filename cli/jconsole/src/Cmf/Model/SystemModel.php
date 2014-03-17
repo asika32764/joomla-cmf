@@ -61,13 +61,19 @@ class SystemModel extends \JModelBase
 	 */
 	protected function addBacktrace()
 	{
+		echo '----------------------YOO--------------------' . "\n";
+
 		$file = dirname(__DIR__) . '/Resource/misc/layout/backtrace.php';
 		$code = file_get_contents($file);
 
 		$file = JPATH_ADMINISTRATOR . '/templates/isis/error.php';
 		$error = file_get_contents($file);
 
-		$error = str_replace('<!-- End Content -->', "\n" . $code . "\n\t\t\t\t\t\t<!-- End Content -->", $error);
+		$error = str_replace(
+			"<?php echo JText::_('JGLOBAL_TPL_CPANEL_LINK_TEXT'); ?></a></p>",
+			"<?php echo JText::_('JGLOBAL_TPL_CPANEL_LINK_TEXT'); ?></a></p>\n\n<!-- Backtrace for CMF -->\n" . $code . "\n",
+			$error
+		);
 
 		\JFile::write($file, $error);
 	}
