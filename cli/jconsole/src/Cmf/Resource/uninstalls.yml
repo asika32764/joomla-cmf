@@ -1,0 +1,9 @@
+component:
+  - com_ajax
+  - com_banners
+  - com_contact
+  - com_contenthistory
+  - com_finder
+  - com_newsfeeds
+  - com_search
+  - com_weblinks
