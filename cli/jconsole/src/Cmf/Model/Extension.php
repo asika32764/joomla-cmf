@@ -47,9 +47,9 @@ class Extension extends \JModelDatabase
 	{
 		$query = $this->db->getQuery(true)
 			->update('#__extensions')
-			->set('protected', 0);
+			->set('protected = 0');
 
-		// $this->db->setQuery($query)->execute();
+		$this->db->setQuery($query)->execute();
 
 		return $this;
 	}
@@ -90,7 +90,7 @@ class Extension extends \JModelDatabase
 						continue;
 					}
 
-					// if ($this->installer->uninstall($type, $ext->extension_id))
+					if ($this->installer->uninstall($type, $ext->extension_id))
 					{
 						$this->postInstall($type, $extName, $client);
 

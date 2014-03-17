@@ -32,6 +32,8 @@ class Hook extends \JModelDatabase
 
 		if (is_file($file))
 		{
+			$db = $this->db;
+
 			include $file;
 		}
 
