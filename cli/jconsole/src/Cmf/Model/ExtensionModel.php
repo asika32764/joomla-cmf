@@ -15,7 +15,7 @@ use Joomla\Registry\Registry;
  *
  * @since 1.0
  */
-class Extension extends \JModelDatabase
+class ExtensionModel extends \JModelDatabase
 {
 	/**
 	 * Property installer.
@@ -35,7 +35,7 @@ class Extension extends \JModelDatabase
 
 		$this->extensions = $this->loadExtensions();
 
-		$this->hook = new Hook;
+		$this->hook = new HookModel;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Extension extends \JModelDatabase
 			->update('#__extensions')
 			->set('protected = 0');
 
-		$this->db->setQuery($query)->execute();
+		// $this->db->setQuery($query)->execute();
 
 		return $this;
 	}
@@ -90,7 +90,7 @@ class Extension extends \JModelDatabase
 						continue;
 					}
 
-					if ($this->installer->uninstall($type, $ext->extension_id))
+					// if ($this->installer->uninstall($type, $ext->extension_id))
 					{
 						$this->postInstall($type, $extName, $client);
 

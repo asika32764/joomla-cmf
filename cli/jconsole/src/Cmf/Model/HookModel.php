@@ -13,7 +13,7 @@ namespace Cmf\Model;
  *
  * @since 1.0
  */
-class Hook extends \JModelDatabase
+class HookModel extends \JModelDatabase
 {
 	/**
 	 * execute
