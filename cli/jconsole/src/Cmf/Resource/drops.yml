@@ -1,5 +1,5 @@
 table:
-    - '#__content_types'
+    - '#__core_log_searches'
     - '#__core_log_searches'
     - '#__'
     - '#__'
