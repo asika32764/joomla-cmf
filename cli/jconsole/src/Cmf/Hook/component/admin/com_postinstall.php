@@ -10,7 +10,8 @@
 $db->dropTable('#__postinstall_messages');
 
 $file  = JPATH_ADMINISTRATOR . '/components/com_cpanel/views/cpanel/view.html.php';
-$regex = '/^\/\/\sLoad the RAD(.*)count\(\$messages\)\;/m';
+$regex = '/\/\/\sLoad the RAD(.*)count\(\$messages\)\;/ms';
+$replace = '// Removed for CMF';
 
-$content = preg_replace($regex, file_get_contents($file), '');
+$content = preg_replace($regex, $replace, file_get_contents($file));
 \JFile::write($file, $content);
