@@ -26,9 +26,9 @@ table:
     '#__ucm_base': all
     '#__ucm_content': all
     '#__ucm_history': all
-    '#__update_sites': all
-    '#__update_sites_extensions': all
-    '#__updates': all
+    '#__update_sites': cols
+    '#__update_sites_extensions': cols
+    '#__updates': cols
     '#__user_keys': all
     '#__user_notes': all
     '#__user_profiles': all
