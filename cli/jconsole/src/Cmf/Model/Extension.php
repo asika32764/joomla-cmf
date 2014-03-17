@@ -90,7 +90,7 @@ class Extension extends \JModelDatabase
 						continue;
 					}
 
-					if ($this->installer->uninstall($type, $ext->extension_id))
+					// if ($this->installer->uninstall($type, $ext->extension_id))
 					{
 						$this->postInstall($type, $extName, $client);
 
