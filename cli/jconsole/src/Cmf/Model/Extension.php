@@ -34,6 +34,8 @@ class Extension extends \JModelDatabase
 		$this->installer = new \JInstaller;
 
 		$this->extensions = $this->loadExtensions();
+
+		$this->hook = new Hook;
 	}
 
 	/**
@@ -90,6 +92,8 @@ class Extension extends \JModelDatabase
 
 					if ($this->installer->uninstall($type, $ext->extension_id))
 					{
+						$this->postInstall($type, $extName, $client);
+
 						$uninstalled[] = $extName;
 					}
 				}
@@ -140,6 +144,20 @@ class Extension extends \JModelDatabase
 			->from('#__extensions');
 
 		return $this->db->setQuery($query)->loadObjectList();
+	}
+
+	/**
+	 * postInstall
+	 *
+	 * @param string $type
+	 * @param string $extension
+	 * @param int    $client
+	 *
+	 * @return  boolean
+	 */
+	protected function postInstall($type, $extension, $client)
+	{
+		return $this->hook->execute($type, $extension, $client);
 	}
 }
  
