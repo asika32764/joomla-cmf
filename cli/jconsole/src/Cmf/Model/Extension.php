@@ -29,7 +29,11 @@ class Extension extends \JModelDatabase
 	 */
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->installer = new \JInstaller;
+
+		$this->extensions = $this->loadExtensions();
 	}
 
 	/**
@@ -59,23 +63,83 @@ class Extension extends \JModelDatabase
 
 		$uninstalls->loadFile(dirname(__DIR__) . '/Resource/uninstalls.yml', 'yaml');
 
-		$this->unstallComponent('component', $uninstalls['component']);
+		// Hack for CMS
+		$app = \JFactory::getApplication();
+
+		$_SERVER['HTTP_HOST'] = 'php://';
+		\JFactory::$application = new \JApplicationAdministrator;
+
+		// Extension type
+		foreach ($uninstalls->toArray() as $type => $clients)
+		{
+			// Site => 0 or Admin => 1
+			foreach ((array) $clients as $client => $extensions)
+			{
+				$uninstalled = array();
+
+				// Extensions
+				foreach ((array) $extensions as $extName)
+				{
+					// Get extension information
+					$ext = $this->queryExtension($type, $extName, $client);
+
+					if (empty($ext->extension_id))
+					{
+						continue;
+					}
+
+					if ($this->installer->uninstall($type, $ext->extension_id))
+					{
+						$uninstalled[] = $extName;
+					}
+				}
+
+				// Analyze
+				$position = $type ? 'site' : 'admin';
+
+				$this->state->set('uninstall.' . $type . '.' . $position, $uninstalled);
+			}
+		}
+
+		// Restore
+		\JFactory::$application = $app;
 	}
 
 	/**
-	 * unstallComponent
+	 * queryExtension
 	 *
-	 * @param $type
-	 * @param $extensions
+	 * @param string $type
+	 * @param string $element
+	 * @param int    $client
+	 * @param string $group
 	 *
-	 * @return  void
+	 * @return  mixed
 	 */
-	protected function unstallComponent($type, $extensions)
+	protected function queryExtension($type, $element, $client = 1, $group = null)
 	{
-		foreach ($extensions as $ext)
+		foreach ($this->extensions as $ext)
 		{
-			$this->installer->uninstall($type, $ext);
+			if ($ext->name == $element && $ext->type == $type && $ext->client_id == $client)
+			{
+				return $ext;
+			}
 		}
+
+		return new \stdClass;
+	}
+
+	/**
+	 * loadExtensions
+	 *
+	 * @return  mixed
+	 */
+	protected function loadExtensions()
+	{
+		$query = $this->db->getQuery(true)
+			->select('*')
+			->from('#__extensions');
+
+		return $this->db->setQuery($query)->loadObjectList();
 	}
 }
  

@@ -78,5 +78,7 @@ class Make extends JCommand
 
 		$this->out('Uninstall extensions...');
 		$model->uninstallExtensions();
+
+		print_r($model->getState());
 	}
 }
