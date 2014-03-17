@@ -45,7 +45,7 @@ class SystemModel extends \JModelBase
 
 		foreach ($folders as $folder)
 		{
-			if (\JFolder::copy($dir . '/' . $folder, $tpl . '/html/' . $folder))
+			if (\JFolder::copy($dir . '/' . $folder, $tpl . '/html/' . $folder, '', true))
 			{
 				$copied[] = $tpl . '/html/' . $folder;
 			}
