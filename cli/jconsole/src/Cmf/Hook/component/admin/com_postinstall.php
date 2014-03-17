@@ -9,7 +9,7 @@
 /** @var $db JDatabaseDriver */
 $db->dropTable('#__postinstall_messages');
 
-$file  = JPATH_ADMINISTRATOR . '/components/com_cpanel/views/view.html.php';
+$file  = JPATH_ADMINISTRATOR . '/components/com_cpanel/views/cpanel/view.html.php';
 $regex = '/^\/\/\sLoad the RAD(.*)count\(\$messages\)\;/m';
 
 $content = preg_replace($regex, file_get_contents($file), '');
