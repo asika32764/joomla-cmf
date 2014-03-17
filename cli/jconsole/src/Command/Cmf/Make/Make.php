@@ -12,6 +12,7 @@ namespace Command\Cmf\Make;
 defined('JCONSOLE') or die;
 
 use Cmf\Model\ExtensionModel;
+use Cmf\Model\SystemModel;
 use Cmf\Model\TableModel;
 use JConsole\Command\JCommand;
 
@@ -74,6 +75,7 @@ class Make extends JCommand
 	{
 		$extension = new ExtensionModel;
 		$table = new TableModel;
+		$system = new SystemModel;
 
 		$this->out('Unprotect extensions...');
 		$extension->unprotectAll();
@@ -84,7 +86,11 @@ class Make extends JCommand
 		$this->out('Drop tables...');
 		$table->dropTables();
 
+		$this->out('Misc handling...');
+		$system->postMake();
+
 		print_r($extension->getState());
 		print_r($table->getState());
+		print_r($system->getState());
 	}
 }
