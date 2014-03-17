@@ -9,3 +9,10 @@
 /** @var $db JDatabaseDriver */
 $db->dropTable('#__messages');
 $db->dropTable('#__messages_cfg');
+
+$file  = JPATH_LIBRARIES . '/cms/application/administrator.php';
+$regex = '/public static function purgeMessages\(\)\s*\{/ms';
+$replace = "\n\t\t// Hack for CMF\n\t\treturn;";
+
+$content = preg_replace($regex, $replace, file_get_contents($file));
+\JFile::write($file, $content);
