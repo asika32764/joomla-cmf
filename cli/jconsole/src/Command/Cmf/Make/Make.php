@@ -89,8 +89,13 @@ class Make extends JCommand
 		$this->out('Misc handling...');
 		$system->postMake();
 
+		// @TODO: Show information.
+		/*
 		print_r($extension->getState());
 		print_r($table->getState());
 		print_r($system->getState());
+		*/
+
+		return true;
 	}
 }
