@@ -61,8 +61,6 @@ class SystemModel extends \JModelBase
 	 */
 	protected function addBacktrace()
 	{
-		echo '----------------------YOO--------------------' . "\n";
-
 		$file = dirname(__DIR__) . '/Resource/misc/layout/backtrace.php';
 		$code = file_get_contents($file);
 
