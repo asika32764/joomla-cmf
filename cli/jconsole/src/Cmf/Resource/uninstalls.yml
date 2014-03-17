@@ -8,8 +8,44 @@ component:
         - com_newsfeeds
         - com_search
         - com_weblinks
+
+        # Protected
+        - com_mailto
+        - com_wrapper
+        - com_messages
+        - com_content
+        - com_joomlaupdate
+        - com_postinstall
 module:
     0:
+        - mod_articles_archive
+        - mod_articles_latest
+        - mod_articles_popular
+        - mod_banners
+        - mod_feed
+        - mod_footer
+        - mod_articles_news
+        - mod_random_image
+        - mod_related_items
+        - mod_search
+        - mod_stats
+        - mod_weblinks
+        - mod_whosonline
+        - mod_wrapper
+        - mod_articles_category
+        - mod_articles_categories
+        - mod_finder
     1:
+        - mod_feed
+        - mod_latest
+        - mod_popular
+        - mod_status
+        - mod_multilangstatus
+        - mod_version
+        - mod_stats_admin
+        - mod_tags_popular
+        - mod_tags_similar
 plugin:
     0:
+
+
