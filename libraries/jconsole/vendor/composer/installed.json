@@ -554,8 +554,8 @@
     },
     {
         "name": "asika/joomla-console",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "target-dir": "Joomla/Console",
         "source": {
             "type": "git",
@@ -578,7 +578,7 @@
         },
         "time": "2014-02-07 09:43:24",
         "type": "joomla-package",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "Joomla\\Console": ""
@@ -616,7 +616,7 @@
         },
         "time": "2014-01-26 22:34:08",
         "type": "project",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "VerbalExpressions": "src/"

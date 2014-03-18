@@ -9,7 +9,7 @@
 		}
 	],
 	"require" : {
-		"asika/joomla-console" : "dev-master",
+		"asika/joomla-console" : "1.1.*",
 		"symfony/yaml" : "2.*",
 		"verbalexpressions/php-verbal-expressions" : "dev-master"
 	},
