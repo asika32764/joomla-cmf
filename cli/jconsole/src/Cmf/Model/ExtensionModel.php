@@ -65,12 +65,6 @@ class ExtensionModel extends \JModelDatabase
 
 		$uninstalls->loadFile(dirname(__DIR__) . '/Resource/uninstalls.yml', 'yaml');
 
-		// Hack for CMS
-		$app = \JFactory::getApplication();
-
-		$_SERVER['HTTP_HOST'] = 'php://';
-		\JFactory::$application = new \JApplicationAdministrator;
-
 		// Extension type
 		foreach ($uninstalls->toArray() as $type => $clients)
 		{
@@ -104,9 +98,6 @@ class ExtensionModel extends \JModelDatabase
 				$this->state->set('uninstall.' . $type . '.' . $position, $uninstalled);
 			}
 		}
-
-		// Restore
-		\JFactory::$application = $app;
 	}
 
 	/**

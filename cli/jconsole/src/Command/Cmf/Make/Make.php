@@ -77,6 +77,13 @@ class Make extends JCommand
 		$table = new TableModel;
 		$system = new SystemModel;
 
+		// Hack for CMS
+		$app = \JFactory::getApplication();
+
+		$_SERVER['HTTP_HOST'] = 'php://';
+		\JFactory::$application = new \JApplicationAdministrator;
+
+		// Do convert
 		$this->out('Unprotect extensions...');
 		$extension->unprotectAll();
 
@@ -88,6 +95,9 @@ class Make extends JCommand
 
 		$this->out('Misc handling...');
 		$system->postMake();
+
+		// Restore
+		\JFactory::$application = $app;
 
 		// @TODO: Show information.
 		/*
