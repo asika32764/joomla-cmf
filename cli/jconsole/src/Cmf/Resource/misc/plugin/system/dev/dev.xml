@@ -6,5 +6,6 @@
 	<files>
 		<filename plugin="dev">dev.php</filename>
 		<filename>index.html</filename>
+		<folder>language</folder>
 	</files>
 </extension>
