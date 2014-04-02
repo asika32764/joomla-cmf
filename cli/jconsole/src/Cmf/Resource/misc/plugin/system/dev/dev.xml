@@ -2,4 +2,9 @@
 <extension version="3.3" type="plugin" group="system">
 	<name>plg_system_dev</name>
 	<author>SMS Taiwan</author>
+
+	<files>
+		<filename plugin="dev">dev.php</filename>
+		<filename>index.html</filename>
+	</files>
 </extension>
