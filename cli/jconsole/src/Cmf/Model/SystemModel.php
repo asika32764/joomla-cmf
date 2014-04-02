@@ -13,7 +13,7 @@ namespace Cmf\Model;
  *
  * @since 1.0
  */
-class SystemModel extends \JModelBase
+class SystemModel extends \JModelDatabase
 {
 	/**
 	 * postMake
@@ -86,6 +86,13 @@ class SystemModel extends \JModelBase
 		$installer = new \JInstaller;
 
 		$installer->install(dirname(__DIR__) . '/Resource/misc/plugin/system/dev');
+
+		$query = $this->db->getQuery(true)
+			->update('#__extensions')
+			->set("enabled = 1")
+			->where("`name` = 'plg_system_dev'");
+
+		$this->db->setQuery($query)->execute();
 	}
 }
  
