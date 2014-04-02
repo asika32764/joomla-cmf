@@ -8,8 +8,6 @@
 
 namespace Cmf\Model;
 
-use Joomla\Registry\Registry;
-
 /**
  * Class Extension
  *
@@ -27,6 +25,8 @@ class SystemModel extends \JModelBase
 		$this->copyTemplates();
 
 		$this->addBacktrace();
+
+		$this->installDevPlugin();
 	}
 
 	/**
@@ -74,6 +74,18 @@ class SystemModel extends \JModelBase
 		);
 
 		\JFile::write($file, $error);
+	}
+
+	/**
+	 * installDevPlugin
+	 *
+	 * @return  void
+	 */
+	protected function installDevPlugin()
+	{
+		$installer = new \JInstaller;
+
+		$installer->install(dirname(__DIR__) . '/Resource/misc/plugin/system/dev');
 	}
 }
  
