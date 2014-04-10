@@ -4,7 +4,14 @@ A light Joomla! with limited core extensions.
 
 ## Installation
 
-Clone this repo and copy `configuration.dist.php` to `configuration.php`, then fill database information.
+Download this repo to your project path.
+
+Copy `configuration.dist.php` to `configuration.php`, then fill database information.
+
+``` bash
+cp configuration.dist.php configuration.php
+EDITOR configuration.php
+```
 
 Execute these commands:
 
