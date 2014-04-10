@@ -8,7 +8,6 @@
 
 /** @var $db JDatabaseDriver */
 $db->dropTable('#__content');
-$db->dropTable('#__contentitem_tag_map');
+// $db->dropTable('#__contentitem_tag_map');
 $db->dropTable('#__content_frontpage');
 $db->dropTable('#__content_rating');
-$db->dropTable('#__contentitem_tag_map');
