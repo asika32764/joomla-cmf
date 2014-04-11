@@ -4,7 +4,7 @@ A light Joomla! with limited core extensions.
 
 ## Installation
 
-Download this repo to your project path.
+Download [this repo](https://github.com/asika32764/joomla-cmf/archive/master.zip) to your project path.
 
 Copy `configuration.dist.php` to `configuration.php`, then fill database information.
 
