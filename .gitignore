@@ -1,6 +1,7 @@
 # System #
 .*
 Thumbs.db
+!.gitignore
 
 # Apache #
 # .htaccess
