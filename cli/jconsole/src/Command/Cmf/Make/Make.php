@@ -105,6 +105,8 @@ class Make extends JCommand
 		print_r($table->getState());
 		print_r($system->getState());
 		*/
+		
+		$this->out('Make CMF success!');
 
 		return true;
 	}
