@@ -1636,6 +1636,10 @@
         extra_query: { Field: extra_query, Type: varchar(1000), 'Null': YES, Default: '', Extra: '', Comment: '', From: [extra_query] }
     index:
         - { Table: '#__update_sites', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_site_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', 'Joomla Core', collection, 'http://update.joomla.org/core/list.xml', '1', '1395045860', '']
+        - ['2', 'Joomla Extension Directory', collection, 'http://update.joomla.org/jed/list.xml', '1', '1395045860', '']
+        - ['3', 'Accredited Joomla! Translations', collection, 'http://update.joomla.org/language/translationlist_3.xml', '1', '1395045860', '']
 '#__update_sites_extensions':
     name: '#__update_sites_extensions'
     from:
@@ -1646,6 +1650,11 @@
     index:
         - { Table: '#__update_sites_extensions', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_site_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
         - { Table: '#__update_sites_extensions', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: extension_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
+    data:
+        - ['1', '700']
+        - ['2', '700']
+        - ['3', '600']
+        - ['3', '10002']
 '#__updates':
     name: '#__updates'
     from:
