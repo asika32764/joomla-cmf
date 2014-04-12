@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'VerbalExpressions' => array($vendorDir . '/verbalexpressions/php-verbal-expressions/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Sqlsync' => array($baseDir . '/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),

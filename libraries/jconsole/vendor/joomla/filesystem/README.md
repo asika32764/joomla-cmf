@@ -1,22 +1,20 @@
-# The Filesystem Package
+# The Filesystem Package [![Build Status](https://travis-ci.org/joomla-framework/filesystem.png?branch=master)](https://travis-ci.org/joomla-framework/filesystem)
 
 
 ## Installation via Composer
 
-Add `"joomla/filesystem": "dev-master"` to the require block in your composer.json, make sure you have `"minimum-stability": "dev"` and then run `composer install`.
+Add `"joomla/filesystem": "~1.0"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
 	"require": {
-		"joomla/filesystem": "dev-master"
-	},
-	"minimum-stability": "dev"
+		"joomla/filesystem": "~1.0"
+	}
 }
 ```
 
 Alternatively, you can simply run the following from the command line:
 
 ```sh
-composer init --stability="dev"
-composer require joomla/filesystem "dev-master"
+composer require joomla/filesystem "~1.0"
 ```
