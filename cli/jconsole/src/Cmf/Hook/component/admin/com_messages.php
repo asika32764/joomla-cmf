@@ -20,19 +20,8 @@ $content = preg_replace($regex, $replace, file_get_contents($file));
 
 // Remove JTableUser db queries when deleting users.
 $file  = JPATH_LIBRARIES . '/joomla/table/user.php';
-$find = "\$query->clear()
-			->delete(\$this->_db->quoteName('#__messages_cfg'))
-			->where(\$this->_db->quoteName('user_id') . ' = ' . (int) \$this->\$k);
-		\$this->_db->setQuery(\$query);
-		\$this->_db->execute();
+$content = file_get_contents($file);
 
-		\$query->clear()
-			->delete(\$this->_db->quoteName('#__messages'))
-			->where(\$this->_db->quoteName('user_id_to') . ' = ' . (int) \$this->\$k);
-		\$this->_db->setQuery(\$query);
-		\$this->_db->execute();";
-
-$replace = "// Hack for CMF";
-
-$content = str_replace($find, $replace, file_get_contents($file));
+$content = str_replace(array('#__messages_cfg', '#__messages'), '#__user_usergroup_map', $file);
+$content = str_replace('user_id_to', 'user_id', $file);
 \JFile::write($file, $content);
