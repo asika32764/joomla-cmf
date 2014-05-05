@@ -22,6 +22,6 @@ $content = preg_replace($regex, $replace, file_get_contents($file));
 $file  = JPATH_LIBRARIES . '/joomla/table/user.php';
 $content = file_get_contents($file);
 
-$content = str_replace(array('#__messages_cfg', '#__messages'), '#__user_usergroup_map', $file);
-$content = str_replace('user_id_to', 'user_id', $file);
+$content = str_replace(array('#__messages_cfg', '#__messages'), '#__user_usergroup_map', $content);
+$content = str_replace('user_id_to', 'user_id', $content);
 \JFile::write($file, $content);
