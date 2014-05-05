@@ -62,7 +62,7 @@ class Make extends JCommand
 	 */
 	public function configure()
 	{
-		// $this->addCommand();
+		$this->addOption(array('u', 'no-user'), 0, 'Do not create user account.');
 
 		parent::configure();
 	}
