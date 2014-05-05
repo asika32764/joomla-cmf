@@ -57,6 +57,13 @@ class Makesum extends JCommand
 	protected $paths = null;
 
 	/**
+	 * Property useWindwalker.
+	 *
+	 * @var  bool
+	 */
+	protected $useWindwalker = false;
+
+	/**
 	 * Configure command information.
 	 *
 	 * @return void
@@ -67,7 +74,11 @@ class Makesum extends JCommand
 			array('a', 'admin'),
 			0,
 			'Use admin client.'
-		);
+			)->addOption(
+				array('w', 'windwalker'),
+				0,
+				'Use Windwalker sum style.'
+			);
 
 		parent::configure();
 	}
@@ -91,6 +102,8 @@ class Makesum extends JCommand
 
 			exit(0);
 		}
+
+		$this->useWindwalker = $this->getOption('w', 0);
 
 		$this->registerPaths($this->getOption('a'));
 
@@ -130,7 +143,22 @@ class Makesum extends JCommand
 				continue;
 			}
 
-			$this->makeSum($path, $type);
+			if ($this->useWindwalker)
+			{
+				$this->makeSum($path, $type);
+			}
+			else
+			{
+				$sum = $this->makeSum($path, $type);
+
+				if( $sum )
+				{
+					if (\JFile::write($path . '/MD5SUM', $sum))
+					{
+						$this->out('Wrote file: ' . $path . '/MD5SUM');
+					}
+				}
+			}
 		}
 	}
 
@@ -140,7 +168,7 @@ class Makesum extends JCommand
 	 * @param   string  $dir
 	 * @param   string  $type
 	 *
-	 * @return  void
+	 * @return  string|void
 	 */
 	protected function makeSum($dir, $type = 'css')
 	{
@@ -148,9 +176,11 @@ class Makesum extends JCommand
 
 		$files = new \RecursiveIteratorIterator($dirs);
 
+		$content = '';
+
 		foreach ($files as $file)
 		{
-			/** @var $file \SplDirect */
+			/** @var $file \SplFileInfo */
 			if ($file->isDir() || $file->getExtension() != $type)
 			{
 				continue;
@@ -158,15 +188,29 @@ class Makesum extends JCommand
 
 			$content = file_get_contents((string) $file);
 
-			$content = md5($content);
-
-			$path = \JPath::clean($file . '.sum');
-
-			if (\JFile::write($path, $content))
+			if ($this->useWindwalker)
 			{
-				$this->out('Wrote file: ' . $path);
+				$content = md5($content);
+
+				$path = \JPath::clean($file . '.sum');
+
+				if (\JFile::write($path, $content))
+				{
+					$this->out('Wrote file: ' . $path);
+				}
+			}
+			else
+			{
+				$content .= file_get_contents((string) $file);
 			}
 		}
+
+		if ($this->useWindwalker)
+		{
+			return $content;
+		}
+
+		return true;
 	}
 
 	/**
@@ -181,9 +225,6 @@ class Makesum extends JCommand
 		$this->paths = new \SplPriorityQueue;
 
 		$prefix = $admin ? 'administrator/' : '';
-
-		// For less file in template
-		$this->paths->insert($prefix . 'templates/{template}/less', 850);
 
 		// (1) Find: templates/[tmpl]/[type]/[name]/[file_name].[type]
 		$this->paths->insert($prefix . 'templates/{template}/{type}/{name}', 800);
