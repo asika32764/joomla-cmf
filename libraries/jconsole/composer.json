@@ -1,0 +1,35 @@
+{
+	"name"             : "asika/jconsole",
+	"description"      : "Useful Cli tools for Joomla CMS",
+	"minimum-stability": "stable",
+	"authors"          : [
+		{
+			"name" : "Simon Asika",
+			"email": "asika32764@gmail.com"
+		}
+	],
+	"require" : {
+		"asika/joomla-console" : "1.*",
+		"symfony/yaml" : "2.*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"JConsole" : "src/",
+			"Command"  : "src/",
+			"Sqlsync"  : "src/",
+			"" : "../../cli/jconsole/src/"
+		}
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"JConsole\\Installer\\ComposerInstaller::install"
+		],
+		"post-update-cmd": []
+	},
+	"bin": [
+		"bin/console.php"
+	],
+	"config": {
+		"bin-dir": "../../bin"
+	}
+}

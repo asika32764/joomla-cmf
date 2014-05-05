@@ -1,0 +1,18 @@
+# System #
+.*
+Thumbs.db
+!.gitignore
+
+# Apache #
+# .htaccess
+
+# For whole Joomla! site #
+/logs/*
+!/logs/index.html
+/log/*
+!/log/index.html
+/cache/*
+!/cache/index.html
+/tmp/*
+!/tmp/index.html
+/configuration.php
