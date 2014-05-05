@@ -14,6 +14,7 @@ defined('JCONSOLE') or die;
 use Cmf\Model\ExtensionModel;
 use Cmf\Model\SystemModel;
 use Cmf\Model\TableModel;
+use Command\User\Create\Create;
 use JConsole\Command\JCommand;
 
 /**
@@ -73,6 +74,10 @@ class Make extends JCommand
 	 */
 	protected function doExecute()
 	{
+		// User create
+		$userCommand = new Create('create', $this->input, $this->output, $this);
+		$userCommand->execute();
+
 		$extension = new ExtensionModel;
 		$table = new TableModel;
 		$system = new SystemModel;
