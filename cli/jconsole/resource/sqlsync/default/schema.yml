@@ -1741,8 +1741,6 @@
     index:
         - { Table: '#__user_usergroup_map', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: user_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
         - { Table: '#__user_usergroup_map', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: group_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
-    data:
-        - ['279', '8']
 '#__usergroups':
     name: '#__usergroups'
     from:
@@ -1798,8 +1796,6 @@
         - { Table: '#__users', Non_unique: '1', Key_name: idx_block, Seq_in_index: '1', Column_name: block, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
         - { Table: '#__users', Non_unique: '1', Key_name: username, Seq_in_index: '1', Column_name: username, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
         - { Table: '#__users', Non_unique: '1', Key_name: email, Seq_in_index: '1', Column_name: email, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
-    data:
-        - ['279', 'Super User', smstw, service@bm-sms.com.tw, $2y$10$jX1l77Uhl.gsK8n5yJ8hP.pIJ6koE8clCw37n/IMcKQy6k57z/T/e, '0', '1', '2014-03-17 08:43:46', '2014-05-05 12:04:11', '0', '{}', '0000-00-00 00:00:00', '0', '', '', '0']
 '#__viewlevels':
     name: '#__viewlevels'
     from:
