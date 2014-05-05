@@ -74,7 +74,7 @@ class Make extends JCommand
 	 */
 	protected function doExecute()
 	{
-		if ($this->getOption('u'))
+		if (!$this->getOption('u'))
 		{
 			// User create
 			$userCommand = new Create('create', $this->input, $this->output, $this);
