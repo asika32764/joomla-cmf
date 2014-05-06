@@ -81,7 +81,7 @@ class JConfig
 	public $cookie_domain = '';
 	public $cookie_path = '';
 	public $asset_id = '1';
-	public $language = 'zh-TW';
+	public $language = 'en-GB';
 	public $useStrongEncryption = '1';
 
 	public function __construct()
