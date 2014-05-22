@@ -205,9 +205,9 @@ class Makesum extends JCommand
 			}
 		}
 
-		if ($this->useWindwalker)
+		if (! $this->useWindwalker)
 		{
-			return $content;
+			return md5($content);
 		}
 
 		return true;
