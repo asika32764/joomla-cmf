@@ -62,8 +62,8 @@ table:
     '#__user_keys': all
     '#__user_notes': all
     '#__user_profiles': all
-    '#__user_usergroup_map': all
+    '#__user_usergroup_map': cols
     '#__usergroups': all
-    '#__users': all
+    '#__users': cols
     '#__viewlevels': all
     '#__weblinks': all
