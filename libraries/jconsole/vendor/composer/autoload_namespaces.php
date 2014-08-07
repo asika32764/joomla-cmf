@@ -11,7 +11,6 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Joomla\\Session' => array($vendorDir . '/joomla/session'),
     'Joomla\\Console' => array($vendorDir . '/asika/joomla-console'),
-    'Joomla\\Application' => array($vendorDir . '/joomla/application'),
     'JConsole' => array($baseDir . '/src'),
     'Command' => array($baseDir . '/src'),
     '' => array($baseDir . '/../../cli/jconsole/src'),

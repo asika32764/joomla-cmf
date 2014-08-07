@@ -20,4 +20,8 @@ return array(
     'Joomla\\Filter\\' => array($vendorDir . '/joomla/filter/src'),
     'Joomla\\Filesystem\\Tests\\' => array($vendorDir . '/joomla/filesystem/Tests'),
     'Joomla\\Filesystem\\' => array($vendorDir . '/joomla/filesystem/src'),
+    'Joomla\\Event\\Tests\\' => array($vendorDir . '/joomla/event/Tests'),
+    'Joomla\\Event\\' => array($vendorDir . '/joomla/event/src'),
+    'Joomla\\Application\\Tests\\' => array($vendorDir . '/joomla/application/Tests'),
+    'Joomla\\Application\\' => array($vendorDir . '/joomla/application/src'),
 );

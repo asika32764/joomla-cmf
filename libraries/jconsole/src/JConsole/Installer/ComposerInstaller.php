@@ -24,7 +24,7 @@ class ComposerInstaller
 	 * @var  string
 	 */
 	static protected $binFile = <<<BIN
-#!/usr/bin/env sh
+#!/usr/bin/env php
 <?php
 
 include_once dirname(__DIR__) . '/libraries/jconsole/bin/console.php';
@@ -48,6 +48,8 @@ BIN;
 		$io->write('Writing console file to bin.');
 
 		file_put_contents($path . '/../../cli/console', static::$binFile);
+
+		chmod($path . '/../../cli/console', 0755);
 
 		// Resource dir
 		$resourceDir = $path . '/../../cli/jconsole';
