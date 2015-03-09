@@ -41,7 +41,7 @@ table:
     '#__languages': all
     '#__menu': all
     '#__menu_types': all
-    '#__messages': all
+    '#__messages': cols
     '#__messages_cfg': all
     '#__modules': all
     '#__modules_menu': all
@@ -59,11 +59,10 @@ table:
     '#__update_sites': all
     '#__update_sites_extensions': all
     '#__updates': cols
-    '#__user_keys': all
-    '#__user_notes': all
-    '#__user_profiles': all
+    '#__user_keys': cols
+    '#__user_notes': cols
+    '#__user_profiles': cols
     '#__user_usergroup_map': cols
     '#__usergroups': all
     '#__users': cols
     '#__viewlevels': all
-    '#__weblinks': all
