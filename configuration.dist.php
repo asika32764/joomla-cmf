@@ -37,7 +37,7 @@ class JConfig
 	public $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $editor = 'jce';
+	public $editor = 'tinymce';
 	public $captcha = '0';
 	public $list_limit = '100';
 	public $access = '1';
@@ -54,7 +54,7 @@ class JConfig
 	public $offset = 'Asia/Taipei';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'service@bm-sms.com.tw';
+	public $mailfrom = '';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
 	public $smtpuser = '';
