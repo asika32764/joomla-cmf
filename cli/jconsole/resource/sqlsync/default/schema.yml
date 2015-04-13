@@ -468,7 +468,7 @@
         - ['32', com_postinstall, component, com_postinstall, '', '1', '1', '1', '1', '{"name":"com_postinstall","type":"component","creationDate":"September 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_POSTINSTALL_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['101', SimplePie, library, simplepie, '', '0', '1', '1', '1', '{"name":"SimplePie","type":"library","creationDate":"2004","author":"SimplePie","copyright":"Copyright (c) 2004-2009, Ryan Parman and Geoffrey Sneddon","authorEmail":"","authorUrl":"http:\/\/simplepie.org\/","version":"1.2","description":"LIB_SIMPLEPIE_XML_DESCRIPTION","group":"","filename":"simplepie"}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['102', phputf8, library, phputf8, '', '0', '1', '1', '1', '{"name":"phputf8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\/\/sourceforge.net\/projects\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
-        - ['103', 'Joomla! Platform', library, joomla, '', '0', '1', '1', '1', '{"name":"Joomla! Platform","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"http:\/\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"b87a704870ba67fec768d6ad2d0009d2"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['103', 'Joomla! Platform', library, joomla, '', '0', '1', '1', '1', '{"name":"Joomla! Platform","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"http:\/\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"330ebd9e44317cd074631cc3e4c336ea"}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['104', 'IDNA Convert', library, idna_convert, '', '0', '1', '1', '1', '{"name":"IDNA Convert","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\/\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\/\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['105', FOF, library, fof, '', '0', '1', '1', '1', '{"name":"FOF","type":"library","creationDate":"2014-11-28 11:21:40","author":"Nicholas K. Dionysopoulos \/ Akeeba Ltd","copyright":"(C)2011-2014 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\/\/www.akeebabackup.com","version":"2.4.1","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['106', PHPass, library, phpass, '', '0', '1', '1', '1', '{"name":"PHPass","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\/\/www.openwall.com\/phpass\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
@@ -567,7 +567,7 @@
         - ['507', isis, template, isis, '', '1', '1', '1', '0', '{"name":"isis","type":"template","creationDate":"3\/30\/2012","author":"Kyle Ledbetter","copyright":"Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"","version":"1.0","description":"TPL_ISIS_XML_DESCRIPTION","group":"","filename":"templateDetails"}', '{"templateColor":"","logoFile":""}', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['600', 'English (en-GB)', language, en-GB, '', '0', '1', '1', '1', '{"name":"English (en-GB)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"en-GB site language","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
         - ['601', 'English (en-GB)', language, en-GB, '', '1', '1', '1', '1', '{"name":"English (en-GB)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"en-GB administrator language","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
-        - ['700', files_joomla, file, joomla, '', '0', '1', '1', '1', '{"name":"files_joomla","type":"file","creationDate":"February 2015","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"FILES_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
+        - ['700', files_joomla, file, joomla, '', '0', '1', '1', '1', '{"name":"files_joomla","type":"file","creationDate":"February 2015","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.1","description":"FILES_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', '0', '0000-00-00 00:00:00', '0', '0']
 '#__finder_filters':
     name: '#__finder_filters'
     from:
@@ -1438,7 +1438,7 @@
         - { Table: '#__schemas', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: extension_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
         - { Table: '#__schemas', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '2', Column_name: version_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
     data:
-        - ['700', 3.4.0-2015-01-21]
+        - ['700', 3.4.0-2015-02-26]
 '#__session':
     name: '#__session'
     from:
@@ -1624,8 +1624,8 @@
     index:
         - { Table: '#__update_sites', Non_unique: '0', Key_name: PRIMARY, Seq_in_index: '1', Column_name: update_site_id, Sub_part: null, 'Null': '', Comment: '', Index_comment: '' }
     data:
-        - ['1', 'Joomla! Core', collection, 'http://update.joomla.org/core/list.xml', '1', '1425869460', '']
-        - ['2', 'Joomla! Extension Directory', collection, 'http://update.joomla.org/jed/list.xml', '1', '1425869460', '']
+        - ['1', 'Joomla! Core', collection, 'http://update.joomla.org/core/list.xml', '1', '0', '']
+        - ['2', 'Joomla! Extension Directory', collection, 'http://update.joomla.org/jed/list.xml', '1', '1428899563', '']
         - ['3', 'Accredited Joomla! Translations', collection, 'http://update.joomla.org/language/translationlist_3.xml', '1', '0', '']
         - ['4', 'Joomla! Update Component Update Site', extension, 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', '1', '0', '']
 '#__update_sites_extensions':
