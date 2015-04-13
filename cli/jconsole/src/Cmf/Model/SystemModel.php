@@ -27,6 +27,8 @@ class SystemModel extends \JModelDatabase
 		$this->addBacktrace();
 
 		$this->installDevPlugin();
+
+		$this->prepareConfiguration();
 	}
 
 	/**
@@ -94,5 +96,20 @@ class SystemModel extends \JModelDatabase
 
 		$this->db->setQuery($query)->execute();
 	}
+
+	/**
+	 * prepareConfiguration
+	 * 
+	 * @return void
+	 */
+	protected function prepareConfiguration()
+	{
+		$file = JPATH_ROOT . '/configuration.php';
+
+		$config = file_get_contents($file);
+
+		$config = str_replace('CEh8niy2Mg7zwHk4', md5(uniqid() . 'Joomla-CMF' . rand(0, 100)), $config);
+
+		file_put_contents($file, $config);
+	}
 }
- 

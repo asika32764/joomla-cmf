@@ -39,7 +39,7 @@ class JConfig
 	public $offline_image = '';
 	public $editor = 'tinymce';
 	public $captcha = '0';
-	public $list_limit = '100';
+	public $list_limit = '25';
 	public $access = '1';
 	public $live_site = '';
 	public $secret = 'CEh8niy2Mg7zwHk4';
@@ -51,7 +51,7 @@ class JConfig
 	public $ftp_pass = '';
 	public $ftp_root = '';
 	public $ftp_enable = '0';
-	public $offset = 'Asia/Taipei';
+	public $offset = 'UTC';
 	public $mailonline = '1';
 	public $mailer = 'mail';
 	public $mailfrom = '';
