@@ -2,6 +2,8 @@
 
 A light Joomla! with limited core extensions.
 
+![img](https://cloud.githubusercontent.com/assets/1639206/8377861/854887e2-1c47-11e5-96ee-77882d780328.jpg)
+
 ## Installation
 
 Download [this repo](https://github.com/asika32764/joomla-cmf/archive/master.zip) to your project path.
