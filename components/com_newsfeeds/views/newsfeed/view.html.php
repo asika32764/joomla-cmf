@@ -228,10 +228,10 @@ class NewsfeedsViewNewsfeed extends JViewLegacy
 	 */
 	protected function _prepareDocument()
 	{
-		$app		= JFactory::getApplication();
-		$menus		= $app->getMenu();
-		$pathway	= $app->getPathway();
-		$title		= null;
+		$app     = JFactory::getApplication();
+		$menus   = $app->getMenu();
+		$pathway = $app->getPathway();
+		$title   = null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
@@ -300,7 +300,7 @@ class NewsfeedsViewNewsfeed extends JViewLegacy
 		{
 			$this->document->setDescription($this->item->metadesc);
 		}
-		elseif (!$this->item->metadesc && $this->params->get('menu-meta_description'))
+		elseif ($this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
@@ -309,7 +309,7 @@ class NewsfeedsViewNewsfeed extends JViewLegacy
 		{
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
-		elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords'))
+		elseif ($this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}

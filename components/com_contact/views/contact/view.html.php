@@ -93,7 +93,7 @@ class ContactViewContact extends JViewLegacy
 		}
 
 		// Check if access is not public
-		$groups	= $user->getAuthorisedViewLevels();
+		$groups = $user->getAuthorisedViewLevels();
 
 		$return = '';
 
@@ -103,22 +103,22 @@ class ContactViewContact extends JViewLegacy
 			return;
 		}
 
-		$options['category_id']	= $item->catid;
-		$options['order by']	= 'a.default_con DESC, a.ordering ASC';
+		$options['category_id'] = $item->catid;
+		$options['order by']    = 'a.default_con DESC, a.ordering ASC';
 
 		// Handle email cloaking
 		if ($item->email_to && $params->get('show_email'))
 		{
 			$item->email_to = JHtml::_('email.cloak', $item->email_to);
 		}
-			if ($params->get('show_street_address') || $params->get('show_suburb') || $params->get('show_state')
-				|| $params->get('show_postcode') || $params->get('show_country'))
+		if ($params->get('show_street_address') || $params->get('show_suburb') || $params->get('show_state')
+			|| $params->get('show_postcode') || $params->get('show_country'))
+		{
+			if (!empty ($item->address) || !empty ($item->suburb) || !empty ($item->state) || !empty ($item->country) || !empty ($item->postcode))
 			{
-				if (!empty ($item->address) || !empty ($item->suburb) || !empty ($item->state) || !empty ($item->country) || !empty ($item->postcode))
-				{
-					$params->set('address_check', 1);
-				}
+				$params->set('address_check', 1);
 			}
+		}
 		else
 		{
 			$params->set('address_check', 0);
@@ -245,7 +245,8 @@ class ContactViewContact extends JViewLegacy
 
 		// Override the layout only if this is not the active menu item
 		// If it is the active menu item, then the view and item id will match
-		$active	= $app->getMenu()->getActive();
+		$active = $app->getMenu()->getActive();
+
 		if ((!$active) || ((strpos($active->link, 'view=contact') === false) || (strpos($active->link, '&id=' . (string) $this->item->id) === false)))
 		{
 			if ($layout = $params->get('contact_layout'))
@@ -268,15 +269,15 @@ class ContactViewContact extends JViewLegacy
 
 	/**
 	 * Prepares the document
-	 * 
+	 *
 	 * @return  void
 	 */
 	protected function _prepareDocument()
 	{
-		$app		= JFactory::getApplication();
-		$menus		= $app->getMenu();
-		$pathway	= $app->getPathway();
-		$title 		= null;
+		$app     = JFactory::getApplication();
+		$menus   = $app->getMenu();
+		$pathway = $app->getPathway();
+		$title   = null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
@@ -344,7 +345,7 @@ class ContactViewContact extends JViewLegacy
 		{
 			$this->document->setDescription($this->item->metadesc);
 		}
-		elseif (!$this->item->metadesc && $this->params->get('menu-meta_description'))
+		elseif ($this->params->get('menu-meta_description'))
 		{
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
@@ -353,7 +354,7 @@ class ContactViewContact extends JViewLegacy
 		{
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
-		elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords'))
+		elseif ($this->params->get('menu-meta_keywords'))
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
