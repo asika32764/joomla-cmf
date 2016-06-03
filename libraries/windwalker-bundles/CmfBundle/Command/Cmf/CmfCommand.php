@@ -8,6 +8,7 @@
 
 namespace CmfBundle\Command\Cmf;
 
+use CmfBundle\Command\Cmf\Make\MakeCommand;
 use Windwalker\Console\Command\Command;
 
 /**
@@ -37,4 +38,16 @@ class CmfCommand extends Command
 	 * @var  string
 	 */
 	public $description = 'Cmf maker.';
+
+	/**
+	 * initialise
+	 *
+	 * @return  void
+	 */
+	protected function initialise()
+	{
+		$this->addCommand(new MakeCommand);
+
+		parent::initialise();
+	}
 }

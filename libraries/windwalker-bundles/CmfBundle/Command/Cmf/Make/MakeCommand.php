@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-namespace CmfBundle\Command\CmfBundle\Make;
+namespace CmfBundle\Command\Cmf\Make;
 
 use Command\User\Create\CreateCommand;
 use Windwalker\Console\Command\Command;
