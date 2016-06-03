@@ -18,8 +18,8 @@ EDITOR configuration.php
 Execute these commands:
 
 ``` bash
-php cli/console sql import default -y
-php cli/console cmf make
+php bin/windwalker sql import default -y
+php bin/windwalker cmf make
 ```
 
 The CMF system will convert this Joomla! package to CMF package, and ask you to create a new user.
