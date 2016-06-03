@@ -27,7 +27,9 @@ class ModulesViewModules extends JViewLegacy
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
 	 *
-	 * @return  void
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 *
+	 * @since   1.6
 	 */
 	public function display($tpl = null)
 	{
@@ -49,14 +51,16 @@ class ModulesViewModules extends JViewLegacy
 			return false;
 		}
 
-		if ($this->getLayout() == 'default')
+		// We don't need the toolbar in the modal window.
+		if ($this->getLayout() !== 'modal')
 		{
 			$this->addToolbar();
 		}
 
 		// Include the component HTML helpers.
 		JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-		parent::display($tpl);
+
+		return parent::display($tpl);
 	}
 
 	/**
@@ -68,16 +72,21 @@ class ModulesViewModules extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$clientText = ((int) $this->state->get('filter.client_id') === 1) ? JText::_('JADMINISTRATOR') : JText::_('JSITE');
-
-		JToolbarHelper::title(JText::sprintf('COM_MODULES_MANAGER_MODULES_TITLE', $clientText), 'cube module');
-
 		$state = $this->get('State');
 		$canDo = JHelperContent::getActions('com_modules');
 		$user  = JFactory::getUser();
 
 		// Get the toolbar object instance
 		$bar = JToolbar::getInstance('toolbar');
+
+		if ($state->get('filter.client_id') == 1)
+		{
+			JToolbarHelper::title(JText::_('COM_MODULES_MANAGER_MODULES_ADMIN'), 'cube module');
+		}
+		else
+		{
+			JToolbarHelper::title(JText::_('COM_MODULES_MANAGER_MODULES_SITE'), 'cube module');
+		}
 
 		if ($canDo->get('core.create'))
 		{
