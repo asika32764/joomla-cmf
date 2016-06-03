@@ -1,0 +1,19 @@
+{
+    "name": "windwalker/rad-development-bundle",
+    "description": "Development Bundle includes Seeders and Sql sync tools.",
+    "license": "GNU Lesser General Public License",
+    "minimum-stability": "beta",
+    "require": {
+        "fzaninotto/faker": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DevelopmentBundle\\": ""
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "DevelopmentBundle\\Installer\\ComposerInstaller::install"
+        ]
+    }
+}

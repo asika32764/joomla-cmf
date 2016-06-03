@@ -1,0 +1,4 @@
+#!/usr/bin/env php
+<?php
+
+include_once dirname(__DIR__) . '/libraries/windwalker/bin/windwalker.php';
