@@ -8,7 +8,10 @@
 
 namespace CmfBundle\Command\Cmf\Make;
 
-use Command\User\Create\CreateCommand;
+use CmfBundle\Model\ExtensionModel;
+use CmfBundle\Model\SystemModel;
+use CmfBundle\Model\TableModel;
+use SystemBundle\Command\User\Create\CreateCommand;
 use Windwalker\Console\Command\Command;
 
 /**
