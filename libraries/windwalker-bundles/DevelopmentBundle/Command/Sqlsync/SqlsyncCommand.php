@@ -63,6 +63,41 @@ class SqlsyncCommand extends Command
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
 
+		// Create DB first
+		$this->initDb();
+
 		return parent::execute();
+	}
+
+	/**
+	 * initDb
+	 *
+	 * @return  void
+	 */
+	protected function initDb()
+	{
+		$config = \JFactory::getConfig();
+
+		$host = $config->get('host');
+		$user = $config->get('user');
+		$password = $config->get('password');
+		$database = $config->get('db');
+		$prefix = $config->get('dbprefix');
+		$driver = $config->get('dbtype');
+
+		$options = array('driver' => $driver, 'host' => $host, 'user' => $user, 'password' => $password, 'prefix' => $prefix);
+
+		$options['db_select'] = false;
+
+		$db = \JDatabaseDriver::getInstance($options);
+
+		$dbs = $db->setQuery('SHOW DATABASES')->loadColumn();
+		
+		if (!in_array($database, $dbs))
+		{
+			$db->setQuery('CREATE DATABASE `' . $database . '` CHARACTER SET `utf8`')->execute();
+		}
+
+		$db->disconnect();
 	}
 }

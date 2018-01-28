@@ -86,6 +86,7 @@ class YamlExporter extends AbstractExporter
 	{
 		$db = $this->db;
 
+		$tableStatus = $db->setQuery('SHOW TABLE STATUS WHERE Name = ' . $db->quote($db->replacePrefix($table)))->loadAssoc();
 		$columns = $db->setQuery('SHOW FULL COLUMNS FROM ' . $db->quoteName($db->escape($table)))->loadAssocList('Field');
 		$indexes = $db->setQuery("SHOW INDEX FROM `{$table}`")->loadAssocList();
 
@@ -119,7 +120,7 @@ class YamlExporter extends AbstractExporter
 			unset($column['Key']);
 			unset($column['Privileges']);
 			// unset($column['Extra']);
-			unset($column['Collation']);
+			// unset($column['Collation']);
 		}
 
 		// Handle index details
@@ -135,8 +136,18 @@ class YamlExporter extends AbstractExporter
 			$index['Table'] = TableHelper::stripPrefix($index['Table']);
 		}
 
+		// Handle Collation and charset
+		$charset = 'utf8';
+
+		if (strpos($tableStatus['Collation'], 'utf8mb4') !== false)
+		{
+			$charset = 'utf8mb4';
+		}
+
 		$result['name'] = $table;
 		$result['from'] = array($table);
+		$result['charset'] = $charset;
+		$result['collation'] = $tableStatus['Collation'];
 		$result['columns'] = $columns;
 		$result['index'] = $indexes;
 		// $sql = preg_replace('#AUTO_INCREMENT=\S+#is', '', $result[1]);

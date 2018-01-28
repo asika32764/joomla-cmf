@@ -13,6 +13,10 @@ table:
     '#__contentitem_tag_map': all
     '#__core_log_searches': all
     '#__extensions': all
+    '#__fields': all
+    '#__fields_categories': all
+    '#__fields_groups': all
+    '#__fields_values': all
     '#__finder_filters': cols
     '#__finder_links': cols
     '#__finder_links_terms0': cols
@@ -48,14 +52,14 @@ table:
     '#__newsfeeds': all
     '#__overrider': all
     '#__postinstall_messages': all
-    '#__redirect_links': all
+    '#__redirect_links': cols
     '#__schemas': all
     '#__session': cols
     '#__tags': all
     '#__template_styles': all
     '#__ucm_base': all
     '#__ucm_content': all
-    '#__ucm_history': all
+    '#__ucm_history': cols
     '#__update_sites': all
     '#__update_sites_extensions': all
     '#__updates': cols

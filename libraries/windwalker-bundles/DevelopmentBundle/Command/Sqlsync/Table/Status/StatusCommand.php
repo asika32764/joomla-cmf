@@ -66,6 +66,11 @@ class StatusCommand extends Command
 
 		$tables = ArrayHelper::getColumn($statuses, 'table');
 
+		if (!count($tables))
+		{
+			throw new \UnexpectedValueException('No tables now');
+		}
+
 		$maxLength = max(array_map('strlen', $tables));
 
 		// Show message

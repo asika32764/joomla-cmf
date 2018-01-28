@@ -43,14 +43,14 @@ Windwalker Sqlsync is a powerful SQL compare & diff tools help developers update
 
 ### Why Not Migration Tools?
 
-Actually, we are developing a migration tools for Joomla & Windwalker now, but migration is not so fit Joomla CMS, sometimes 
-you will want to sync Joomla articles, modules, extensions and menus etc. to your production server. Migration tools are
+Actually, we are developing a migration tools for Joomla & Windwalker now, but migration is not so suitable for Joomla CMS, sometimes 
+we will want to sync Joomla articles, modules, extensions and menus to your production server. Migration tools are
 hard to do this. 
 
-So use Sqlsync tools, it helps you compare sql schema between your local & remote machine, simply run `export` in your local,
-and git track all schema files, then push your files to remote server and run `import`, all schema will update to remote.
+So, using Sqlsync tools will help you compare sql schema between your local & remote machine, simply run `export` in your local,
+and git track all schema YAML files. Then push your files to remote server and run `import`, all schemas will update to remote.
 
-> Currently Sqlsync are weak on column name change, try avoid to do this operation.
+> Currently Sqlsync are weak on column name change, you can use hooks to do this.
 
 ### Export & Import SQL Schema
 
@@ -234,8 +234,11 @@ And simply write your script to do something.
 
 if (!JFactory::getConfig()->get('debug'))
 {
-    throw new \Exception('STOP import, please enable debug mode to do any DB operations.');
+    throw new \Exception('STOP importing, please enable debug mode to do any DB operations.');
 }
+
+// Or do some advanced DB actions, for instance, rename column or remove indexes.
+JFactory::getDbo()->setQuery('ALTER TABLE ...')->execute();
 
 ```
 

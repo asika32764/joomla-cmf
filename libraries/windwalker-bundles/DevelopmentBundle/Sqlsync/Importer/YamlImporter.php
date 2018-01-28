@@ -44,11 +44,6 @@ class YamlImporter extends AbstractImporter
 	protected $tables;
 
 	/**
-	 * @var bool
-	 */
-	protected $debug = false;
-
-	/**
 	 * @var array
 	 */
 	protected $analyze = array();
@@ -77,6 +72,8 @@ class YamlImporter extends AbstractImporter
 			}
 
 			$tableName = $newTableName ?: $tableName;
+
+			$this->convertTableCharset($tableName, $table);
 
 			$this->changeColumns($tableName, ArrayHelper::getValue($table, 'columns', array()));
 
@@ -167,13 +164,13 @@ class YamlImporter extends AbstractImporter
 
 		foreach ($columns as $column)
 		{
-			$null = ($column['Null'] == 'NO') ? ' NOT NULL' : '';
+			$null = ($column['Null'] === 'NO') ? ' NOT NULL' : '';
 
-			@$ai = $column['Extra'] == 'auto_increment' ? ' AUTO_INCREMENT' : '';
+			@$ai = $column['Extra'] === 'auto_increment' ? ' AUTO_INCREMENT' : '';
 
 			$comment = $column['Comment'] ? ' COMMENT ' . $this->db->quote($column['Comment']) : '';
 
-			if ($column['Default'] == 'CURRENT_TIMESTAMP')
+			if ($column['Default'] === 'CURRENT_TIMESTAMP')
 			{
 				$default = ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP';
 			}
@@ -190,7 +187,7 @@ class YamlImporter extends AbstractImporter
 
 		foreach ($indexes as $index)
 		{
-			if (ArrayHelper::getValue($index, 'Key_name') == 'PRIMARY')
+			if (ArrayHelper::getValue($index, 'Key_name') === 'PRIMARY')
 			{
 				$primaryColumns[] = $this->db->qn(ArrayHelper::getValue($index, 'Column_name'));
 			}
@@ -201,13 +198,35 @@ class YamlImporter extends AbstractImporter
 			$addColumns[] = "PRIMARY KEY (" . implode(', ', $primaryColumns) . ")";
 		}
 
-		$this->sql[] = $sql = "CREATE TABLE IF NOT EXISTS `{$name}` (\n  " . implode(",\n  ", $addColumns) . "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+		$charset = ArrayHelper::getValue($table, 'charset', 'utf8mb4');
+		$collation = ArrayHelper::getValue($table, 'collation', 'utf8mb4_general_ci');
+
+		$this->sql[] = $sql = "CREATE TABLE IF NOT EXISTS `{$name}` (\n  " . implode(",\n  ", $addColumns) . "\n) ENGINE=InnoDB DEFAULT CHARSET=$charset COLLATE $collation";
 
 		$this->execute($sql);
 
 		$this->analyze('Table', 'Created');
 
 		return $name;
+	}
+
+	/**
+	 * convertTableCharset
+	 *
+	 * @param string $name
+	 * @param array  $table
+	 *
+	 * @return  bool
+	 */
+	public function convertTableCharset($name, $table)
+	{
+		$charset = ArrayHelper::getValue($table, 'charset', 'utf8mb4');
+		$collation = ArrayHelper::getValue($table, 'collation', 'utf8mb4_general_ci');
+		$sql = "ALTER TABLE `$name` CONVERT TO CHARACTER SET $charset COLLATE $collation;";
+
+		$this->db->setQuery($sql)->execute();
+
+		return true;
 	}
 
 	/**
@@ -310,6 +329,8 @@ class YamlImporter extends AbstractImporter
 
 			@$ai = $column['Extra'] == 'auto_increment' ? 'AUTO_INCREMENT' : '';
 
+			@$collation = $column['Collation'] ? 'COLLATE ' . $column['Collation'] : '';
+
 			$comment = $column['Comment'] ? 'COMMENT ' . $this->db->quote($column['Comment']) : '';
 
 			$position = $before ? 'AFTER ' . $before : 'FIRST';
@@ -324,7 +345,7 @@ class YamlImporter extends AbstractImporter
 			}
 
 			// Build sql
-			$this->sql[] = $sql = "ALTER TABLE `{$tableName}` ADD `{$columnName}` {$column['Type']} {$null} {$default} {$ai} {$comment} {$position}";
+			$this->sql[] = $sql = "ALTER TABLE `{$tableName}` ADD `{$columnName}` {$column['Type']} {$null} {$default} {$collation} {$ai} {$comment} {$position}";
 
 			$this->execute($sql);
 
@@ -347,7 +368,6 @@ class YamlImporter extends AbstractImporter
 	{
 		$oldColumn = $this->getOldColumn($tableName, $columnName);
 
-		unset($oldColumn['Collation']);
 		unset($oldColumn['Key']);
 		unset($oldColumn['Privileges']);
 		unset($column['From']);
@@ -357,13 +377,15 @@ class YamlImporter extends AbstractImporter
 			return false;
 		}
 
-		$null = ($column['Null'] == 'NO') ? ' NOT NULL' : '';
+		$null = ($column['Null'] === 'NO') ? ' NOT NULL' : '';
 
-		@$ai = $column['Extra'] == 'auto_increment' ? ' AUTO_INCREMENT' : '';
+		@$ai = $column['Extra'] === 'auto_increment' ? ' AUTO_INCREMENT' : '';
+
+		@$collation = $column['Collation'] ? ' COLLATE ' . $column['Collation'] : '';
 
 		$comment = $column['Comment'] ? ' COMMENT ' . $this->db->quote($column['Comment']) : '';
 
-		if ($column['Default'] == 'CURRENT_TIMESTAMP')
+		if ($column['Default'] === 'CURRENT_TIMESTAMP')
 		{
 			$default = ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP';
 		}
@@ -373,7 +395,7 @@ class YamlImporter extends AbstractImporter
 		}
 
 		// Build sql
-		$this->sql[] = $sql = "ALTER TABLE `{$tableName}` CHANGE `{$columnName}` `{$columnName}` {$column['Type']}{$null}{$default}{$ai}{$comment}";
+		$this->sql[] = $sql = "ALTER TABLE `{$tableName}` CHANGE `{$columnName}` `{$columnName}` {$column['Type']}{$null}{$default}{$collation}{$ai}{$comment}";
 
 		$this->execute($sql);
 
@@ -470,7 +492,7 @@ class YamlImporter extends AbstractImporter
 			$this->dropIndex($tableName, $indexName);
 		}
 
-		if ($index['Key_name'] == 'PRIMARY')
+		if ($index['Key_name'] === 'PRIMARY')
 		{
 			$this->sql[] = $sql = "ALTER TABLE `{$tableName}` ADD PRIMARY KEY (" . implode(', ', $columns) . ")";
 		}
@@ -664,14 +686,7 @@ class YamlImporter extends AbstractImporter
 	 */
 	protected function getOldIndexes($table)
 	{
-		if (!empty($this->indexes[$table]))
-		{
-			return $this->indexes[$table];
-		}
-
-		$indexes = $this->db->setQuery("SHOW INDEX FROM `{$table}`")->loadAssocList();
-
-		return $this->indexes[$table] = $indexes;
+		return $this->db->setQuery("SHOW INDEX FROM `{$table}`")->loadAssocList();
 	}
 
 	/**
@@ -727,17 +742,5 @@ class YamlImporter extends AbstractImporter
 		$this->analyze[$schema][$action]++;
 
 		return true;
-	}
-
-	/**
-	 * execute
-	 *
-	 * @param string $sql
-	 *
-	 * @return bool|mixed
-	 */
-	protected function execute($sql)
-	{
-		return $this->debug ? false : $this->db->setQuery($sql)->execute();
 	}
 }

@@ -120,6 +120,19 @@ class Database extends \JModelDatabase
 
 			$this->db->setQuery($query)->execute();
 		}
+		
+		// Utf8mb4
+		if (version_compare(JVERSION, '3.5.0', '>='))
+		{
+			$this->db->setQuery('UPDATE ' . $this->db->quoteName('#__utf8_conversion')
+				. ' SET ' . $this->db->quoteName('converted') . ' = 0;')->execute();
+
+			include_once JPATH_ADMINISTRATOR . '/components/com_installer/models/database.php';
+
+			$model = new \InstallerModelDatabase(array('ignore_request' => true));
+
+			$model->convertTablesToUtf8mb4();
+		}
 
 		$this->state->set('import.queries', count($queries));
 

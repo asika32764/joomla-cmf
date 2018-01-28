@@ -50,7 +50,7 @@ class SeedCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $usage = 'Database seeder <cmd><command></cmd> <option>[option]</option>';
+	protected $usage = 'seed <cmd><command></cmd> <option>[option]</option>';
 
 	/**
 	 * Initialise command information.

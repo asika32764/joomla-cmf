@@ -78,6 +78,9 @@ class ImportCommand extends Command
 			->alias('all')
 			->defaultValue(0)
 			->description('All profiles');
+
+		$this->addOption('no-backup')
+			->description('Skip database backup');
 	}
 
 	/**
@@ -114,7 +117,7 @@ class ImportCommand extends Command
 
 		if ($force)
 		{
-			throw new \RuntimeException('Sorry, force mode not prepare yet...');
+			throw new \RuntimeException('Sorry, force mode not prepared yet...');
 		}
 
 		$state = $model->getState();
@@ -130,19 +133,21 @@ class ImportCommand extends Command
 
 		$config = Factory::getConfig();
 
-		foreach ($profiles as $profile)
+		if (!$this->getOption('no-backup', false))
 		{
-			$config->set('profile', $profile);
-
 			// Backup
-			$this->out()->out(sprintf('<comment>Backing up</comment> profile <info>%s</info> ...', $profile));
+			$this->out()->out(sprintf('<comment>Backing up</comment> profile <info>%s</info> ...', implode(', ', $profiles)));
 
 			$model->backup();
 
 			$this->out()->out(sprintf('Schema file backup to: %s', $model->getState()->get('dump.path')));
+		}
+
+		foreach ($profiles as $profile)
+		{
+			$config->set('profile', $profile);
 
 			// Import
-
 			$this->out()->out(sprintf('<option>Importing</option> profile schema: <info>%s</info> ...', $profile));
 
 			$model->import($force, $type);
