@@ -8,10 +8,10 @@
 
 namespace Windwalker\Console\Application;
 
-use Windwalker\Console\IO\IOInterface;
-use Windwalker\DI\Container;
 use Windwalker\Console\Descriptor\CommandDescriptor;
 use Windwalker\Console\Descriptor\OptionDescriptor;
+use Windwalker\Console\IO\IOInterface;
+use Windwalker\DI\Container;
 use Windwalker\Registry\Registry;
 
 /**
@@ -64,7 +64,7 @@ class Console extends \Windwalker\Console\Console
 		// Make Windows no ANSI color
 		if (defined('PHP_WINDOWS_VERSION_BUILD'))
 		{
-			$io->setOption('ansi', true);
+			$io->setOption('ansi', 'off');
 		}
 
 		parent::__construct($io, $config);
@@ -81,6 +81,15 @@ HELP
 
 		$descriptorHelper->setOptionDescriptor(new OptionDescriptor)
 			->setCommandDescriptor(new CommandDescriptor);
+		
+		/*
+		 * Note: The below code CANNOT change from instantiating a session via JFactory until there is a proper dependency injection container supported
+		 * by the application. The current default behaviours result in this method being called each time an application class is instantiated.
+		 * https://github.com/joomla/joomla-cms/issues/12108 explains why things will crash and burn if you ever attempt to make this change
+		 * without a proper dependency injection container.
+		 */
+		$session = \JFactory::getSession();
+		$session->initialise(new \JInput, $this->dispatcher);
 
 		$this->loadFirstlevelCommands();
 	}
@@ -177,7 +186,33 @@ HELP
 	 */
 	public function enqueueMessage($msg, $type = 'message')
 	{
-		$this->out($msg);
+		switch ($type)
+		{
+			case 'success':
+			case 'green':
+				$tag = '<info>%s</info>';
+				break;
+			case 'warning':
+			case 'yellow':
+				$tag = '<comment>%s</comment>';
+				break;
+			case 'info':
+			case 'blue':
+				$tag = '<option>%s</option>';
+				break;
+			case 'error':
+			case 'danger':
+			case 'red':
+				$tag = '<error>%s</error>';
+				break;
+			default:
+				$tag = '%s';
+				break;
+		}
+
+		$time = \JDate::getInstance('now', $this->get('offset'))->format('Y-m-d H:i:s', true);
+
+		$this->out(sprintf('[%s] ' . $tag, $time, $msg));
 
 		return $this;
 	}

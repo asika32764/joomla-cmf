@@ -9,7 +9,6 @@
 use Windwalker\Model\Filter\FilterHelper;
 use Windwalker\Model\ListModel;
 
-// No direct access
 defined('_JEXEC') or die;
 
 /**
@@ -183,7 +182,15 @@ class {{extension.name.cap}}Model{{controller.list.name.cap}} extends ListModel
 
 		// Limitstart
 		// =====================================================================================
-		$this->set('list.start', $input->getInt('limitstart', 0));
+
+		// Simple fix for current Joomla
+		// @see  https://github.com/ventoviro/windwalker-joomla-rad/issues/203
+		$this->set('list.start', $input->getInt('start', $input->getInt('limitstart', 0)));
+		$this->set(
+			'list.limit',
+			$params->get('num_leading_articles', 0)
+			+ $params->get('num_intro_articles', 15)
+		);
 	}
 
 	/**

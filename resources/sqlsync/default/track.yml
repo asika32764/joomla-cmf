@@ -13,6 +13,10 @@ table:
     '#__contentitem_tag_map': all
     '#__core_log_searches': all
     '#__extensions': all
+    '#__fields': all
+    '#__fields_categories': all
+    '#__fields_groups': all
+    '#__fields_values': cols
     '#__finder_filters': cols
     '#__finder_links': cols
     '#__finder_links_terms0': cols

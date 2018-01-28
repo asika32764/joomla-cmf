@@ -22,7 +22,8 @@ return array(
     'Windwalker\\Compare\\' => array($vendorDir . '/windwalker/compare'),
     'Windwalker\\Cache\\' => array($vendorDir . '/windwalker/cache'),
     'Windwalker\\' => array($baseDir . '/src'),
-    'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
+    'Whoops\\' => array($vendorDir . '/asika/whoops/src/Whoops'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     '' => array($baseDir . '/../../cli/windwalker'),
 );

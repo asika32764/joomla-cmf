@@ -7,13 +7,12 @@
  */
 
 use Windwalker\DI\Container;
-use Windwalker\Helper\HtmlHelper;
 use Windwalker\Helper\LanguageHelper;
 use Windwalker\Helper\ModalHelper;
+use Windwalker\Helper\XmlHelper;
 use Windwalker\Script\JQueryScript;
 use Windwalker\Script\WindwalkerScript;
 
-// No direct access
 defined('_JEXEC') or die;
 
 include_once JPATH_LIBRARIES . '/windwalker/src/init.php';
@@ -45,6 +44,13 @@ class JFormFieldModal extends JFormField
 	 * @var string
 	 */
 	protected $view_item = null;
+
+	/**
+	 * The default table to get items.
+	 *
+	 * @var string
+	 */
+	protected $table;
 
 	/**
 	 * Extension name, eg: com_content.
@@ -181,8 +187,8 @@ class JFormFieldModal extends JFormField
 	 */
 	public function getTitle()
 	{
-		$ctrl        = $this->view_list;
 		$title_field = $this->element['title_field'] ? (string) $this->element['title_field'] : 'title';
+		$table_name  = $this->getTable();
 
 		/** @var $db JDatabaseDriver */
 		$container = Container::getInstance();
@@ -190,7 +196,7 @@ class JFormFieldModal extends JFormField
 		$q  = $db->getQuery(true);
 
 		$q->select($title_field)
-			->from('#__' . $this->component . '_' . $ctrl)
+			->from($table_name)
 			->where("id = '{$this->value}'");
 
 		$db->setQuery($q);
@@ -229,7 +235,7 @@ class JFormFieldModal extends JFormField
 			$params .= '&show_root=1';
 		}
 
-		if ($view == $this->view_item && $option == $this->extension && $layout == 'edit' && $id)
+		if ($view == $this->view_item && $option == $this->extension && $layout === 'edit' && $id)
 		{
 			$params .= '&avoid=' . $id;
 		}
@@ -256,7 +262,7 @@ class JFormFieldModal extends JFormField
 
 		$task             = $this->getElement('task', $this->view_item . '.ajax.quickadd');
 		$quickadd         = $this->getElement('quickadd', false);
-		$table_name       = $this->getElement('table', '#__' . $this->component . '_' . $this->view_list);
+		$table_name       = $this->getTable();
 		$key_field        = $this->getElement('key_field', 'id');
 		$value_field      = $this->getElement('value_field', 'title');
 		$formpath         = $this->getElement('quickadd_formpath', "administrator/components/{$this->extension}/model/form/{$this->view_item}.xml");
@@ -302,6 +308,16 @@ class JFormFieldModal extends JFormField
 		$html .= ModalHelper::renderModal($qid, $content, array('title' => JText::_($modal_title), 'footer' => $footer));
 
 		return $html;
+	}
+
+	/**
+	 * getTable
+	 *
+	 * @return  string
+	 */
+	public function getTable()
+	{
+		return XmlHelper::get($this->element, 'table', $this->table ? : '#__' . $this->component . '_' . $this->view_list);
 	}
 
 	/**

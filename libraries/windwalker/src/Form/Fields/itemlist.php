@@ -7,12 +7,11 @@
  */
 
 use Windwalker\DI\Container;
-use Windwalker\Helper\HtmlHelper;
 use Windwalker\Helper\LanguageHelper;
 use Windwalker\Helper\ModalHelper;
+use Windwalker\Helper\XmlHelper;
 use Windwalker\Script\WindwalkerScript;
 
-// No direct access
 defined('_JEXEC') or die;
 
 JFormHelper::loadFieldClass('list');
@@ -76,6 +75,20 @@ class JFormFieldItemlist extends JFormFieldList
 	protected $component = null;
 
 	/**
+	 * The default table to get items.
+	 *
+	 * @var string
+	 */
+	protected $table;
+
+	/**
+	 * Is a nested set?
+	 *
+	 * @var bool
+	 */
+	protected $nested;
+
+	/**
 	 * Set the published column name in table.
 	 *
 	 * @var string
@@ -120,7 +133,7 @@ class JFormFieldItemlist extends JFormFieldList
 		$key_field   = $this->element['key_field'] ? (string) $this->element['key_field'] : 'id';
 		$value_field = $this->element['value_field'] ? (string) $this->element['value_field'] : 'title';
 		$show_root   = (string) $this->element['show_root'] ? $this->element['show_root'] : false;
-		$nested      = (string) $this->element['nested'];
+		$nested      = $this->getElement('nested', false);
 
 		$items = $this->getItems();
 
@@ -169,10 +182,10 @@ class JFormFieldItemlist extends JFormFieldList
 	{
 		$published   = (string) $this->element['published'];
 		$nested      = (string) $this->element['nested'];
-		$key_field   = $this->element['key_field'] ? (string) $this->element['key_field'] : 'id';
-		$value_field = $this->element['value_field'] ? (string) $this->element['value_field'] : 'title';
+		$keyField    = $this->element['key_field'] ? (string) $this->element['key_field'] : 'id';
+		$valueField  = $this->element['value_field'] ? (string) $this->element['value_field'] : 'title';
 		$ordering    = $this->element['ordering'] ? (string) $this->element['ordering'] : null;
-		$table_name  = $this->element['table'] ? (string) $this->element['table'] : '#__' . $this->component . '_' . $this->view_list;
+		$tableName   = $this->getTable();
 		$select      = $this->element['select'];
 
 		/** @var JDatabaseDriver $db */
@@ -198,7 +211,7 @@ class JFormFieldItemlist extends JFormFieldList
 
 		if ($nested)
 		{
-			$query->where("( id != 1 AND `{$value_field}` != 'ROOT' )");
+			$query->where("( id != 1 AND `{$valueField}` !== 'ROOT' )");
 		}
 
 		// Some filter
@@ -213,7 +226,7 @@ class JFormFieldItemlist extends JFormFieldList
 		$order    = $this->ordering_field ? $this->ordering_field : $order;
 		$ordering = $ordering ? $ordering : $order;
 
-		if ($ordering != 'false')
+		if ($ordering !== 'false')
 		{
 			$query->order($ordering);
 		}
@@ -223,7 +236,7 @@ class JFormFieldItemlist extends JFormFieldList
 		$select = $select ? '*, ' . $select : '*';
 
 		$query->select($select)
-			->from($table_name);
+			->from($tableName);
 
 		$db->setQuery($query);
 		$items = $db->loadObjectList();
@@ -310,7 +323,7 @@ class JFormFieldItemlist extends JFormFieldList
 
 		$task             = $this->getElement('task', $this->view_item . '.ajax.quickadd');
 		$quickadd         = $this->getElement('quickadd', false);
-		$table_name       = $this->getElement('table', '#__' . $this->component . '_' . $this->view_list);
+		$table_name       = $this->getTable();
 		$key_field        = $this->getElement('key_field', 'id');
 		$value_field      = $this->getElement('value_field', 'title');
 		$formpath         = $this->getElement('quickadd_formpath', "administrator/components/{$this->extension}/model/form/{$this->view_item}.xml");
@@ -350,12 +363,22 @@ class JFormFieldItemlist extends JFormFieldList
 		$button_class = 'btn btn-small btn-success quickadd_button';
 
 		$footer = "<button class=\"btn\" type=\"button\" data-dismiss=\"modal\">" . JText::_('JCANCEL') . "</button>";
-		$footer .= "<button class=\"btn btn-primary\" type=\"submit\">" . JText::_('JSUBMIT') . "</button>";
+		$footer .= "<button class=\"btn btn-primary quickadd_submit\" type=\"button\">" . JText::_('JSUBMIT') . "</button>";
 
 		$html .= ModalHelper::modalLink(JText::_($button_title), $qid, array('class' => $button_class, 'icon' => 'icon-new icon-white'));
 		$html .= ModalHelper::renderModal($qid, $content, array('title' => JText::_($modal_title), 'footer' => $footer));
 
 		return $html;
+	}
+
+	/**
+	 * getTable
+	 *
+	 * @return  string
+	 */
+	public function getTable()
+	{
+		return XmlHelper::get($this->element, 'table', $this->table ? : '#__' . $this->component . '_' . $this->view_list);
 	}
 
 	/**

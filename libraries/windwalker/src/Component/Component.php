@@ -10,9 +10,9 @@ namespace Windwalker\Component;
 
 use Joomla\Registry\Registry;
 use Windwalker\Controller\Controller;
+use Windwalker\Controller\Resolver\ControllerResolver;
 use Windwalker\DI\Container;
 use Windwalker\Event\ListenerHelper;
-use Windwalker\Utilities\Reflection\ReflectionHelper;
 
 /**
  * Component class.
@@ -170,7 +170,10 @@ class Component
 	{
 		$task = $this->input->get('task', $this->input->get('controller'));
 
-		/** @var $controller Controller */
+		/**
+		 * @var $controller Controller
+		 * @var $resolver   ControllerResolver
+		 */
 		$resolver   = $this->container->get('controller.resolver');
 		$controller = $resolver->getController($this->name, $task, $this->input);
 
@@ -257,6 +260,12 @@ class Component
 
 			$this->input->set('task',       $task);
 			$this->input->set('controller', $task);
+		}
+
+		// Load JFormFieldList to fix 3.7 FormHelper bugs
+		if (version_compare(JVERSION, '3.7', '>='))
+		{
+			\JFormHelper::loadFieldClass('list');
 		}
 
 		// Register form and fields
@@ -469,7 +478,7 @@ class Component
 	 */
 	public function getPath($client = 'self')
 	{
-		$client = ($client == 'admin') ? 'administrator' : $client;
+		$client = ($client === 'admin') ? 'administrator' : $client;
 
 		return $this->path[$client];
 	}

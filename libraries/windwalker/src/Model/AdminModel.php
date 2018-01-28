@@ -10,11 +10,13 @@ namespace Windwalker\Model;
 
 use JFilterOutput;
 use Joomla\DI\Container as JoomlaContainer;
-use Windwalker\String\StringInflector as Inflector;;
 use JTable;
 use Windwalker\Helper\ArrayHelper;
 use Windwalker\Helper\DateHelper;
 use Windwalker\String\StringHelper;
+use Windwalker\String\StringInflector as Inflector;
+
+;
 
 /**
  * Prototype admin model.
@@ -74,7 +76,7 @@ class AdminModel extends CrudModel
 		$result = parent::save($data);
 
 		// Reorder
-		if ($result && $this->state->get('order.position') == 'first')
+		if ($result && $this->state->get('order.position') === 'first')
 		{
 			$pk = $this->state->get($this->getName() . '.id');
 
@@ -254,6 +256,7 @@ class AdminModel extends CrudModel
 	{
 		$date = DateHelper::getDate('now');
 		$user = $this->container->get('user');
+		$key  = $table->getKeyName();
 
 		// Alias
 		if (property_exists($table, 'alias'))
@@ -313,7 +316,7 @@ class AdminModel extends CrudModel
 		}
 
 		// Modified date
-		if (property_exists($table, 'modified') && $table->id)
+		if (property_exists($table, 'modified') && $table->$key)
 		{
 			$table->modified = $date->toSql();
 		}
@@ -325,7 +328,7 @@ class AdminModel extends CrudModel
 		}
 
 		// Modified user
-		if (property_exists($table, 'modified_by') && $table->id)
+		if (property_exists($table, 'modified_by') && $table->$key)
 		{
 			$table->modified_by = $user->get('id');
 		}
@@ -357,7 +360,7 @@ class AdminModel extends CrudModel
 			return;
 		}
 
-		if ($position == 'first')
+		if ($position === 'first')
 		{
 			if (empty($table->$orderCol))
 			{

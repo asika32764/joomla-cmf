@@ -119,13 +119,13 @@ class CrudModel extends AbstractFormModel
 		$table      = $this->getTable();
 		$dispatcher = $container->get('event.dispatcher');
 
-		if ((!empty($data['tags']) && $data['tags'][0] != ''))
+		if ((!empty($data['tags']) && $data['tags'][0] !== ''))
 		{
 			$table->newTags = $data['tags'];
 		}
 
 		$key = $table->getKeyName();
-		$pk  = ArrayHelper::getValue($data, $key, $this->getState($this->getName() . '.id'));
+		$pk  = ArrayHelper::getValue($data, $key, $this->get($this->getName() . '.id'));
 
 		$isNew = true;
 
@@ -152,7 +152,7 @@ class CrudModel extends AbstractFormModel
 		}
 
 		// Trigger the onContentBeforeSave event.
-		$result = $dispatcher->trigger($this->eventBeforeSave, array($this->option . '.' . $this->name, $table, $isNew));
+		$result = $dispatcher->trigger($this->eventBeforeSave, array($this->option . '.' . $this->name, $table, $isNew, $data));
 
 		if (in_array(false, $result, true))
 		{
@@ -169,7 +169,7 @@ class CrudModel extends AbstractFormModel
 		$this->cleanCache();
 
 		// Trigger the onContentAfterSave event.
-		$dispatcher->trigger($this->eventAfterSave, array($this->option . '.' . $this->name, $table, $isNew));
+		$dispatcher->trigger($this->eventAfterSave, array($this->option . '.' . $this->name, $table, $isNew, $data));
 
 		$pkName = $table->getKeyName();
 
@@ -275,6 +275,8 @@ class CrudModel extends AbstractFormModel
 		foreach ($pks as $pk)
 		{
 			$table->reset();
+
+			$table->load($pk);
 
 			// Set primary
 			$table->$key = $pk;

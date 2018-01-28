@@ -1,9 +1,9 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  mod_tags_popular
+ * @subpackage  mod_tags_similar
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,11 +12,9 @@ defined('_JEXEC') or die;
 use Joomla\Registry\Registry;
 
 /**
- * Helper for mod_tags_popular
+ * Helper for mod_tags_similar
  *
- * @package     Joomla.Site
- * @subpackage  mod_tags_popular
- * @since       3.1
+ * @since  3.1
  */
 abstract class ModTagssimilarHelper
 {
@@ -25,7 +23,7 @@ abstract class ModTagssimilarHelper
 	 *
 	 * @param   Registry  &$params  Module parameters
 	 *
-	 * @return  mixed  Results array / null
+	 * @return  array
 	 */
 	public static function getList(&$params)
 	{
@@ -35,9 +33,9 @@ abstract class ModTagssimilarHelper
 
 		// For now assume com_tags and com_users do not have tags.
 		// This module does not apply to list views in general at this point.
-		if ($option == 'com_tags' || $view == 'category' || $option == 'com_users')
+		if ($option === 'com_tags' || $view === 'category' || $option === 'com_users')
 		{
-			return;
+			return array();
 		}
 
 		$db         = JFactory::getDbo();
@@ -54,9 +52,9 @@ abstract class ModTagssimilarHelper
 
 		$tagsToMatch = $tagsHelper->getTagIds($id, $prefix);
 
-		if (!$tagsToMatch || is_null($tagsToMatch))
+		if (!$tagsToMatch || $tagsToMatch === null)
 		{
-			return;
+			return array();
 		}
 
 		$tagCount = substr_count($tagsToMatch, ',') + 1;
@@ -101,9 +99,9 @@ abstract class ModTagssimilarHelper
 		// Optionally filter on language
 		$language = JComponentHelper::getParams('com_tags')->get('tag_list_language_filter', 'all');
 
-		if ($language != 'all')
+		if ($language !== 'all')
 		{
-			if ($language == 'current_language')
+			if ($language === 'current_language')
 			{
 				$language = JHelperContent::getCurrentLanguage();
 			}
@@ -118,27 +116,28 @@ abstract class ModTagssimilarHelper
 			)
 		);
 
-		if ($matchtype == 'all' && $tagCount > 0)
+		if ($matchtype === 'all' && $tagCount > 0)
 		{
 			$query->having('COUNT( ' . $db->quoteName('tag_id') . ')  = ' . $tagCount);
 		}
-		elseif ($matchtype == 'half' && $tagCount > 0)
+		elseif ($matchtype === 'half' && $tagCount > 0)
 		{
 			$tagCountHalf = ceil($tagCount / 2);
 			$query->having('COUNT( ' . $db->quoteName('tag_id') . ')  >= ' . $tagCountHalf);
 		}
 
-		if ($ordering == 'count' || $ordering == 'countrandom')
+		if ($ordering === 'count' || $ordering === 'countrandom')
 		{
 			$query->order($db->quoteName('count') . ' DESC');
 		}
 
-		if ($ordering == 'random' || $ordering == 'countrandom')
+		if ($ordering === 'random' || $ordering === 'countrandom')
 		{
 			$query->order($query->Rand());
 		}
 
 		$db->setQuery($query, 0, $maximum);
+
 		try
 		{
 			$results = $db->loadObjectList();

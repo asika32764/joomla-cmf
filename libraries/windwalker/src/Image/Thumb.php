@@ -9,9 +9,9 @@
 namespace Windwalker\Image;
 
 use Windwalker\Filesystem\Path;
+use Windwalker\Helper\CurlHelper;
 use Windwalker\Joomla\Registry\DecoratingRegistry;
 use Windwalker\Registry\Registry;
-use Windwalker\Helper\CurlHelper;
 use Windwalker\System\ExtensionHelper;
 
 /**
@@ -96,9 +96,13 @@ class Thumb
 		{
 			$img = new \JImage;
 
-			if (\JFile::exists($path))
+			if (is_file($path))
 			{
 				$img->loadFile($path);
+			}
+			elseif (is_file(urldecode($path)))
+			{
+				$img->loadFile(urldecode($path));
 			}
 			else
 			{
@@ -106,7 +110,7 @@ class Thumb
 			}
 
 			// If file type not png or gif, use jpg as default.
-			if ($file_type != 'png' && $file_type != 'gif')
+			if ($file_type !== 'png' && $file_type !== 'gif')
 			{
 				$file_type = 'jpg';
 			}
@@ -206,7 +210,12 @@ class Thumb
 
 			if (!is_file($path))
 			{
-				CurlHelper::download((string) $url, $path);
+				$options = array(
+					CURLOPT_CONNECTTIMEOUT => $this->config->get('timeout', 10),
+					CURLOPT_TIMEOUT => $this->config->get('timeout', 10),
+				);
+
+				CurlHelper::download((string) $url, $path, $options);
 			}
 		}
 

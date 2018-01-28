@@ -6,7 +6,6 @@
  * @license     GNU General Public License version 2 or later.
  */
 
-// No direct access
 defined('_JEXEC') or die;
 
 use Windwalker\Data\Data;
@@ -119,7 +118,7 @@ $function = $input->get('function', 'jSelectArticle');
 					<!--LANGUAGE-->
 					<td class="center">
 						<?php
-						if ($item->language == '*')
+						if ($item->language === '*')
 						{
 							echo JText::alt('JALL', 'language');
 						}

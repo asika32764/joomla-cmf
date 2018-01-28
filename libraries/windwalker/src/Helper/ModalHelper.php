@@ -9,10 +9,8 @@
 namespace Windwalker\Helper;
 
 use JForm;
-use JHtml;
 use Windwalker\DI\Container;
 
-// No direct access
 defined('_JEXEC') or die;
 
 /**
@@ -102,17 +100,21 @@ FOOTER;
 		}
 
 		// Box
-		$html = <<<MODAL
+		$html = <<<HTML
 <div class="modal hide fade {$selector}" id="{$selector}">
 {$header}
 
 <div id="{$selector}-container" class="modal-body">
-    {$content}
+    <div class="container-fluid">
+        <div class="span12">
+        {$content}
+		</div>
+	</div>
 </div>
 
 {$footer}
 </div>
-MODAL;
+HTML;
 
 		return $html;
 	}

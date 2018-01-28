@@ -9,9 +9,9 @@
 namespace Windwalker\View\Html;
 
 use Joomla\DI\Container;
-use Windwalker\Registry\Registry;
 use Windwalker\Helper\ArrayHelper;
 use Windwalker\Model\Model;
+use Windwalker\Registry\Registry;
 use Windwalker\View\Helper\GridHelper;
 
 /**
@@ -82,6 +82,8 @@ class GridView extends ListHtmlView
 		$this['grid']       = $this['grid'] ? : $this->getGridHelper($this->gridConfig);
 		$this['filterForm'] = $this['filterForm'] ? : $this->get('FilterForm');
 		$this['batchForm']  = $this['batchForm'] ? : $this->get('BatchForm');
+
+		$this['viewObject']->filterForm = $this['filterForm'];
 
 		if ($errors = $this['state']->get('errors'))
 		{

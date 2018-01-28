@@ -8,6 +8,7 @@
 
 namespace Windwalker\Helper;
 
+use Joomla\Uri\Uri;
 use Windwalker\DI\Container;
 use Windwalker\String\Utf8String;
 
@@ -189,28 +190,24 @@ class UriHelper
 			return '';
 		}
 
-		// Build path
-		$uri = new \JUri($path);
-
-		if ($uri->getHost())
+		if (strpos($path, 'http') === 0 || strpos($path, '//') === 0)
 		{
 			return $path;
 		}
 
-		$uri->parse(\JUri::root());
-		$root_path = $uri->getPath();
-
-		if (strpos($path, $root_path) === 0)
+		if (strpos($path, '/') !== 0)
 		{
-			$num  = Utf8String::strlen($root_path);
-			$path = Utf8String::substr($path, $num);
+			return \JUri::root() . $path;
 		}
 
-		$uri->setPath($uri->getPath() . $path);
-		$uri->setScheme('http');
-		$uri->setQuery(null);
+		$uri = clone \JUri::getInstance();
 
-		return $uri->toString();
+		$uri->setQuery(array());
+		$uri->setPath('');
+
+		$host = $uri->toString();
+
+		return rtrim($host, '/') . $path;
 	}
 
 	/**

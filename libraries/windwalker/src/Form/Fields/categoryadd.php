@@ -7,12 +7,10 @@
  */
 
 use Windwalker\DI\Container;
-use Windwalker\Helper\HtmlHelper;
-use Windwalker\Helper\ModalHelper;
 use Windwalker\Helper\LanguageHelper;
+use Windwalker\Helper\ModalHelper;
 use Windwalker\Script\WindwalkerScript;
 
-// No direct access
 defined('_JEXEC') or die;
 
 JFormHelper::loadFieldClass('category');
@@ -126,7 +124,7 @@ class JFormFieldCategoryadd extends JFormFieldCategory
 		$button_class = 'btn btn-small btn-success quickadd_button';
 
 		$footer = "<button class=\"btn\" type=\"button\" data-dismiss=\"modal\">" . JText::_('JCANCEL') . "</button>";
-		$footer .= "<button class=\"btn btn-primary\" type=\"submit\">" . JText::_('JSUBMIT') . "</button>";
+		$footer .= "<button class=\"btn btn-primary quickadd_submit\" type=\"button\">" . JText::_('JSUBMIT') . "</button>";
 
 		$html .= ModalHelper::modalLink(JText::_($button_title), $qid, array('class' => $button_class, 'icon' => 'icon-new icon-white'));
 		$html .= ModalHelper::renderModal($qid, $content, array('title' => JText::_($modal_title), 'footer' => $footer));

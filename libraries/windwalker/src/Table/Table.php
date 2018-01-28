@@ -8,7 +8,6 @@
 
 namespace Windwalker\Table;
 
-use JTable;
 use Windwalker\DI\Container;
 use Windwalker\Relation\Observer\RelationObserver;
 use Windwalker\Relation\Relation;
@@ -26,6 +25,15 @@ class Table extends \JTable
 	 * @var  Relation
 	 */
 	public $_relation;
+
+	/**
+	 * Property _casts.
+	 *
+	 * @var  array
+	 */
+	protected $_jsons = array(
+		'params'
+	);
 
 	/**
 	 * Object constructor to set table and key fields.  In most cases this will
@@ -82,7 +90,23 @@ class Table extends \JTable
 	 */
 	public function load($keys = null, $reset = true)
 	{
-		return parent::load($keys, $reset);
+		$result = parent::load($keys, $reset);
+
+		if ($result)
+		{
+			foreach ($this->_jsons as $field)
+			{
+				if (property_exists($this, $field))
+				{
+					if (is_string($this->$field))
+					{
+						$this->$field = json_decode($this->$field, true);
+					}
+				}
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -98,11 +122,14 @@ class Table extends \JTable
 	 */
 	public function store($updateNulls = false)
 	{
-		if (property_exists($this, 'params') && !empty($this->params))
+		foreach ($this->_jsons as $field)
 		{
-			if (is_array($this->params) || is_object($this->params))
+			if (property_exists($this, $field) && !empty($this->$field))
 			{
-				$this->params = json_encode($this->params);
+				if (is_array($this->$field) || is_object($this->$field))
+				{
+					$this->$field = json_encode($this->$field);
+				}
 			}
 		}
 
@@ -166,14 +193,39 @@ class Table extends \JTable
 	/**
 	 * Get the columns from database table.
 	 *
+	 * @param   bool  $reload  flag to reload cache
+	 *
 	 * @return  mixed  An array of the field names, or false if an error occurs.
 	 *
 	 * @since   11.1
 	 * @throws  \UnexpectedValueException
 	 */
-	public function getFields()
+	public function getFields($reload = false)
 	{
-		return TableHelper::getFields($this);
+		if (version_compare(JVERSION, '3.7', '<'))
+		{
+			return TableHelper::getFields($this);
+		}
+
+		static $caches = array();
+
+		$table= $this->getTableName();
+
+		if (!isset($caches[$table]) || $reload)
+		{
+			// Lookup the fields for this table only once.
+			$name   = $this->_tbl;
+			$fields = $this->_db->getTableColumns($name, false);
+
+			if (empty($fields))
+			{
+				throw new \UnexpectedValueException(sprintf('No columns found for %s table', $name));
+			}
+
+			$caches[$table] = $fields;
+		}
+
+		return $caches[$table];
 	}
 
 	/**
@@ -197,5 +249,49 @@ class Table extends \JTable
 		}
 
 		return $tablePrefix;
+	}
+
+	/**
+	 * Method to get the parent asset under which to register this one.
+	 *
+	 * By default, all assets are registered to the ROOT node with ID, which will default to 1 if none exists.
+	 * An extended class can define a table and ID to lookup.  If the asset does not exist it will be created.
+	 *
+	 * @param   \JTable  $table A JTable object for the asset parent.
+	 * @param   integer $id    Id to look up
+	 *
+	 * @return  integer
+	 *
+	 * @throws \RuntimeException
+	 */
+	protected function _getAssetParentId(\JTable $table = null, $id = null)
+	{
+		$assetId = null;
+
+		// This is an article under a category.
+		if (!empty($this->catid))
+		{
+			// Build the query to get the asset id for the parent category.
+			echo $query = $this->_db->getQuery(true)
+				->select($this->_db->quoteName('asset_id'))
+				->from($this->_db->quoteName('#__categories'))
+				->where($this->_db->quoteName('id') . ' = ' . (int) $this->catid);
+
+			// Get the asset id from the database.
+			$this->_db->setQuery($query);
+
+			if ($result = $this->_db->loadResult())
+			{
+				$assetId = (int) $result;
+			}
+		}
+
+		// Return the asset id.
+		if ($assetId)
+		{
+			return $assetId;
+		}
+
+		return parent::_getAssetParentId($table, $id);
 	}
 }

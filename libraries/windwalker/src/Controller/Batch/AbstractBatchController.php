@@ -10,6 +10,7 @@ namespace Windwalker\Controller\Batch;
 
 use Windwalker\Bootstrap\Message;
 use Windwalker\Controller\Admin\AbstractListController;
+use Windwalker\Model\Exception\ValidateFailException;
 
 /**
  * Batch controller.
@@ -40,6 +41,13 @@ abstract class AbstractBatchController extends AbstractListController
 	protected $categoryKey = 'catid';
 
 	/**
+	 * Property emptyMark.
+	 *
+	 * @var  string
+	 */
+	protected $emptyMark = '__EMPTY__';
+
+	/**
 	 * Prepare execute hook.
 	 *
 	 * @return void
@@ -52,12 +60,30 @@ abstract class AbstractBatchController extends AbstractListController
 
 		unset($this->batch['task']);
 
+		$form = $this->getForm();
+
 		// Sanitize data.
 		foreach ($this->batch as $key => &$value)
 		{
-			if ($value == '')
+			if ($value === '')
 			{
 				unset($this->batch[$key]);
+			}
+			elseif ($value === $this->emptyMark)
+			{
+				$value = '';
+			}
+			elseif ($value === '\\' . $this->emptyMark)
+			{
+				$value = $this->emptyMark;
+			}
+			
+			// Fix for user field
+			$field = $form->getField($key, 'batch');
+
+			if ($field->type === 'User' && (int) $value === 0)
+			{
+				unset($value);
 			}
 		}
 	}
@@ -84,6 +110,11 @@ abstract class AbstractBatchController extends AbstractListController
 		catch (\Exception $e)
 		{
 			$db->transactionRollback();
+
+			if (JDEBUG)
+			{
+				throw $e;
+			}
 
 			$this->setRedirect($this->getFailRedirect(), \JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_FAILED', $e->getMessage()), Message::ERROR_RED);
 
@@ -118,6 +149,11 @@ abstract class AbstractBatchController extends AbstractListController
 
 		$result = array();
 
+		$data = $this->batch;
+
+		$this->validate($data);
+		$data = $this->filter($data);
+
 		foreach ($pks as $pk)
 		{
 			if (!$pk)
@@ -125,13 +161,46 @@ abstract class AbstractBatchController extends AbstractListController
 				continue;
 			}
 
-			$data = $this->batch;
-
 			// Start Batch Process
 			$result[] = $this->save($pk, $data);
 		}
 
 		return $result;
+	}
+
+	/**
+	 * validate
+	 *
+	 * @param array $data
+	 *
+	 * @return  void
+	 *
+	 * @throws ValidateFailException
+	 */
+	protected function validate($data)
+	{
+		$form = $this->getForm();
+
+		if (!$form->validate(array('batch' => $data)))
+		{
+			throw new ValidateFailException($form->getErrors());
+		}
+	}
+
+	/**
+	 * filter
+	 *
+	 * @param array $data
+	 *
+	 * @return  array
+	 */
+	protected function filter($data)
+	{
+		$form = $this->getForm();
+
+		$data = $form->filter(array('batch' => $data));
+
+		return isset($data['batch']) ? $data['batch'] : array();
 	}
 
 	/**
@@ -153,6 +222,11 @@ abstract class AbstractBatchController extends AbstractListController
 	 */
 	protected function postExecute($result = null)
 	{
+		if ($result === false)
+		{
+			return false;
+		}
+
 		if (!is_array($result))
 		{
 			$result = array($result);
@@ -189,5 +263,15 @@ abstract class AbstractBatchController extends AbstractListController
 	protected function postBatchHook($result)
 	{
 		return $result;
+	}
+
+	/**
+	 * getForm
+	 *
+	 * @return  \JForm
+	 */
+	public function getForm()
+	{
+		return $this->getModel($this->viewList)->getBatchForm();
 	}
 }

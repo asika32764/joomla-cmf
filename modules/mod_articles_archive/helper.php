@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  mod_articles_archive
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,9 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Helper for mod_articles_archive
  *
- * @package     Joomla.Site
- * @subpackage  mod_articles_archive
- * @since       1.5
+ * @since  1.5
  */
 class ModArchiveHelper
 {
@@ -47,6 +45,7 @@ class ModArchiveHelper
 		}
 
 		$db->setQuery($query, 0, (int) $params->get('count'));
+
 		try
 		{
 			$rows = (array) $db->loadObjectList();
@@ -54,6 +53,7 @@ class ModArchiveHelper
 		catch (RuntimeException $e)
 		{
 			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+
 			return;
 		}
 

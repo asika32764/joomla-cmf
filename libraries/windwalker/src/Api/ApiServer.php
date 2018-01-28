@@ -8,10 +8,11 @@
 
 namespace Windwalker\Api;
 
-use Windwalker\Registry\Registry;
+use Joomla\Uri\Uri;
 use Windwalker\Api\Authentication\Authentication;
-use Windwalker\System\ExtensionHelper;
 use Windwalker\Api\Response\JsonResponse;
+use Windwalker\Registry\Registry;
+use Windwalker\System\ExtensionHelper;
 
 /**
  * API server.
@@ -137,7 +138,7 @@ class ApiServer
 		$uri  = $uri ? : $this->uri;
 		$path = $uri->getPath();
 
-		return rtrim($path, '/') == '/api';
+		return rtrim($path, '/') === '/api';
 	}
 
 	/**
@@ -160,13 +161,13 @@ class ApiServer
 	 * Parse rule hook.
 	 *
 	 * @param \JRouter $router The router object.
-	 * @param \JUri    $uri    The uri object.
+	 * @param Uri      $uri    The uri object.
 	 *
 	 * @return  array
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function parseRule(\JRouter $router, \JUri $uri)
+	public function parseRule(\JRouter $router, Uri $uri)
 	{
 		$path = $uri->getPath();
 

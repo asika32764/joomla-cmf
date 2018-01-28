@@ -8,6 +8,7 @@
 
 namespace Windwalker\Router;
 
+use Joomla\Uri\Uri;
 use Windwalker\Helper\ArrayHelper;
 
 /**
@@ -152,18 +153,18 @@ class CmsRoute
 	{
 		$resource = explode('.', $resource, 2);
 
-		if (count($resource) == 2)
+		if (count($resource) === 2)
 		{
 			$data['option']    = $resource[0];
 			$data['_resource'] = $resource[1];
 		}
-		elseif (count($resource) == 1)
+		elseif (count($resource) === 1)
 		{
 			$data['option']    = $resource[0];
 			$data['_resource'] = null;
 		}
 
-		$url = new \JUri;
+		$url = new Uri;
 
 		$url->setQuery($data);
 
@@ -209,7 +210,7 @@ class CmsRoute
 				$view   = ArrayHelper::getValue($item->query, 'view');
 				$id     = ArrayHelper::getValue($item->query, 'id');
 
-				if ($option == $data['option'] && $view == $data['view'] && $id == $data['id'])
+				if ($option === $data['option'] && $view === $data['view'] && $id == $data['id'])
 				{
 					$data['Itemid'] = $item->id;
 
@@ -226,7 +227,7 @@ class CmsRoute
 				$option = ArrayHelper::getValue($item->query, 'option');
 				$view   = ArrayHelper::getValue($item->query, 'view');
 
-				if ($option == $data['option'] && $view == $data['view'])
+				if ($option === $data['option'] && $view === $data['view'])
 				{
 					unset($data['view']);
 
@@ -244,7 +245,7 @@ class CmsRoute
 			{
 				$option = ArrayHelper::getValue($item->query, 'option');
 
-				if ($option == $data['option'])
+				if ($option === $data['option'])
 				{
 					$data['Itemid'] = $item->id;
 
@@ -559,7 +560,7 @@ class CmsRoute
 	{
 		$this->scheme = strtolower($scheme);
 
-		$this->ssl = ($this->scheme == 'https');
+		$this->ssl = ($this->scheme === 'https');
 
 		return $this;
 	}

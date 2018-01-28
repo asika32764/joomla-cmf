@@ -6,7 +6,6 @@
  * @license    GNU General Public License version 2 or later.
  */
 
-// No direct access
 defined('_JEXEC') or die;
 
 // Install plugins
@@ -27,7 +26,7 @@ if (!empty($plugins))
 			$path2    = explode('/', $var);
 			$plg_name = array_pop($path2);
 
-			if (substr($plg_name, 0, 4) == 'plg_')
+			if (substr($plg_name, 0, 4) === 'plg_')
 			{
 				$plg_name = substr($plg_name, 4);
 			}
@@ -43,7 +42,7 @@ if (!empty($plugins))
 				$plg_group = (string) $installer->manifest['group'];
 
 				// Enable this plugin.
-				if ($type == 'install')
+				if ($type === 'install')
 				{
 					$q = $db->getQuery(true);
 
